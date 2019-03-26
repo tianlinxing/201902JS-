@@ -35,8 +35,50 @@
 
 - function函数声明要高于带var声明的变量
 
-- 对于等于右边的值 不会进行变量提升 var fe = function() {}
+- 对于等号右边的值 不会进行变量提升 var fe = function() {}
 
 - 语句中不管条件是否成立 都会进行变量提升
 
+- 函数中return右边值 不会参加变量提升，但是return下面的变量 会参加变量提升
+
 > 注意：var n = 100 赋值操作 只有代码执行到这一行才会进行赋值
+
+## 带var和不带var区别
+
+- 当在全局中var一个变量时，也相当于给window上添加一个全局属性
+
+```
+var a = 100 // window.a
+console.log(a)
+console.log(window.a)
+```
+
+- 带var的变量 会参加变量提升，不带var不会参加变量提升
+
+```
+console.log(a) // undefined 变量提升时 赋的默认值
+console.log(b) // b is not defined 没有参加变量提升
+var a = 100;
+b = 100;
+```
+
+- 不带var直接赋值,相当于直接给window上添加了一个全局属性
+
+```
+
+function fe() {
+  a = 100 // window.a = 100
+}
+fe()
+
+console.log(a) // 100
+console.log(window.a) // 100
+
+```
+
+## 作用域链
+
+> 当前作用域查找一个变量时，先看当前作用域中是否声明过，如果当前作用域中没有声明过，就去上级作用域中查找，一直找到window上为止，如果window上也没有就报错：x is not defined
+
+### 上级作用域
+> 看当前函数是在哪里定义的
