@@ -53,13 +53,13 @@ function fn(n) {
   obj.fn(num);
 
   // 题四
-  function fun(n, o) {//
-    console.log(o); //
-    return {
-        fun: function (m) { //
-            return fun(m, n);
-        }
-    };
+function fun(n, o) {//
+  console.log(o); //
+  return {
+    fun: function (m) { //
+        return fun(m, n);
+    }
+  };
 }
 var a = fun(0);
 a.fun(1);
