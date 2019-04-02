@@ -77,33 +77,47 @@
 
 
 
+    // new Fn 这个构造函数中的this是当前实例
+    function Fn(){
+      // 给实例添加私有属性
+      this.x = 100;
+      this.y = 200;
+      this.getX = function () {
+        console.log(this.x);
+      }
+    }
+    Fn.prototype.getX = function () {
+      console.log(this.x); // Fn.prototype.x
+    };
+    Fn.prototype.getY = function () {
+      console.log(this.y);
+    };
 
-    // function Fn(){
-    //   this.x = 100;
-    //   this.y = 200;
-    //   this.getX = function () {
-    //     console.log(this.x);
-    //   }
+    // 公有属性和方法 供实例使用
+    // Fn.prototype = {
+    //   constructor: Fn,
+    //   getX: function,
+    //   getY: function
     // }
-    // Fn.prototype.getX = function () {
-    //   console.log(this.x);
-    // };
-    // Fn.prototype.getY = function () {
-    //   console.log(this.y);
-    // };
-    // var f1 = new Fn;
-    // var f2 = new Fn;
-    // console.log(f1.getX === f2.getX);
-    // console.log(f1.getY === f2.getY);
-    // console.log(f1.__proto__.getY === Fn.prototype.getY);
-    // console.log(f1.__proto__.getX === f2.getX);
-    // console.log(f1.__proto__.getX === Fn.prototype.getX);
-    // console.log(f1.constructor);
-    // console.log(Fn.prototype.__proto__.constructor);
-    // f1.getX();
-    // f1.__proto__.getX();
-    // f2.getY();
-    // Fn.prototype.getY();
+
+    var f1 = new Fn; // { x: 100, y: 200, getX: fn }
+    var f2 = new Fn; // { x: 100, y: 200, getX: fn }
+
+    console.log(f1.getX === f2.getX); // false
+    console.log(f1.getY === f2.getY); // true
+    console.log(f1.__proto__.getY === Fn.prototype.getY); // true
+    console.log(f1.__proto__.getX === f2.getX); // false
+    console.log(f1.__proto__.getX === Fn.prototype.getX); // true
+    console.log(f1.constructor); // Fn
+    // Fn.prototype.__proto__ === Object.prototype
+    console.log(Fn.prototype.__proto__.constructor); // Object
+    f1.getX(); // 100
+    // this =>  f1.__proto__ => Fn.prototype
+    f1.__proto__.getX(); // undefined
+    // this => 2
+    f2.getY(); // 200
+    // this => Fn.prototype => Fn.prototype.y
+    Fn.prototype.getY(); // undefined
   </script>
 </body>
 
