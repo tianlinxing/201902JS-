@@ -32,16 +32,16 @@
     // console.log(f.minus(1, 2)); // -1
 
 
-    function A(){
+    function A() {
       console.log('AAA')
     }
 
-    function B(a){
+    function B(a) {
       this.a = a; // this.a = undefined
     }
 
-    function C(a){
-      if(a){
+    function C(a) {
+      if (a) {
         this.a = a; // this.a = 2
       }
     }
@@ -56,7 +56,7 @@
 
     // 函数也是一个对象 
     // 给函数自身 添加私有属性fe
-    A.fe = function() {
+    A.fe = function () {
       console.log('fe')
     }
 
@@ -68,7 +68,7 @@
     // const m = new A().say
     // console.log(n instanceof A)
     // console.log(n instanceof A.prototype)
-    
+
     // const a1 = new A
     // const a2 = new A.fe
     // console.log(a1 instanceof A)
@@ -78,7 +78,7 @@
 
 
     // new Fn 这个构造函数中的this是当前实例
-    function Fn(){
+    function Fn() {
       // 给实例添加私有属性
       this.x = 100;
       this.y = 200;
@@ -118,6 +118,24 @@
     f2.getY(); // 200
     // this => Fn.prototype => Fn.prototype.y
     Fn.prototype.getY(); // undefined
+
+
+    let n = 10,
+    obj = {
+      n: 20
+    };
+    let fn = obj.fn = (function () {
+      this.n++;
+      n++;
+      return function (m) {
+        n += 10 + (++m);
+        this.n += n;
+        console.log(n);
+      }
+    })(obj.n);
+    fn(10);
+    obj.fn(10);
+    console.log(n, obj.n);
   </script>
 </body>
 
