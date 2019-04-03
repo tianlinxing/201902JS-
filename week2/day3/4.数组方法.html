@@ -30,6 +30,12 @@
 
     // arr1._push(100) // this => arr1
     // arr2._push() // this => arr2
+
+    Array.prototype._pop = function () {
+      var last = this[this.length - 1]
+      this.length--
+      return last
+    }
   </script>
 </body>
 </html>
