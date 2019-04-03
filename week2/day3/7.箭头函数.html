@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
   <script>
     // ES6 特性 箭头函数
@@ -46,7 +48,9 @@
     // }
     // add()
 
-    var obj = {id: 1}
+    var obj = {
+      id: 1
+    }
     const add = () => {
       console.log(this)
     }
@@ -55,9 +59,23 @@
     // var fe = add.bind(obj)
     // console.log(fe)
 
-
+    function fe() {
+      const add = () => {
+        console.log(this)
+      }
+    }
 
     
+    // 箭头函数原理
+
+    // function fe() {
+    // var _this = this;
+
+    // var add = function add() {
+    // console.log(_this);
+    // };
+    // }
   </script>
 </body>
+
 </html>
