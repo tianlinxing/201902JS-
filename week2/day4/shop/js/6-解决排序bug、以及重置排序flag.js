@@ -51,8 +51,7 @@ let flag = -1; // 定义flag负责在1和-1之间来回切换
 
 // 基于价格给productList里面的li排序
 
-let sortList = function (that, index) {
-  console.log(index);
+let sortList = function (that) {
   // console.log(that.innerText);
   // 用来处理排序逻辑的方法
 
@@ -64,16 +63,23 @@ let sortList = function (that, index) {
     // a 和 b都是li元素对象，所以不能直接相减。
     // 我们需要从li上面获取到价格
 
-    // let innerText = that.innerText;
+    let innerText = that.innerText;
     let aInn, bInn;
-    let ary = ['data-time', 'data-price', 'data-hot'];
 
-    aInn = a.getAttribute(ary[index]);
-    bInn = b.getAttribute(ary[index]);
-    let reg = /-/g;
-    if (index === 0) {
-      aInn = aInn.replace(reg, '');
-      bInn = bInn.replace(reg, '')
+    switch (innerText) {
+      case '上架时间':
+        // 因为时间字符串中含有 - 所以相减得到NaN，导致不能排序，所以需要把时间字符串中的-干掉
+        aInn = a.getAttribute('data-time').replace(/-/g, '');
+        bInn = b.getAttribute('data-time').replace(/-/g, '');
+        break;
+      case '价格':
+        aInn = a.getAttribute('data-price');
+        bInn = b.getAttribute('data-price');
+        break;
+      case '热度':
+        aInn = a.getAttribute('data-hot');
+        bInn = b.getAttribute('data-hot');
+        break;
     }
 
     // console.log(aInn, bInn);
@@ -103,6 +109,38 @@ for (let i = 0; i < linkList.length; i++) {
 
 
     this.flag *= -1; // 给当前点击的a标签上的flag 乘以-1
-    sortList(this, i);
+    sortList(this);
   };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
