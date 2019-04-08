@@ -1,3 +1,5 @@
+// ★!★!★!★! 这个文件的代码仅供参考，目的是给大家展示工作中的代码风格
+
 /**
  * 根据元素id获取元素
  * @param 元素ID
@@ -105,7 +107,7 @@ let productList = eleByTagName('li', listBox);
   // 绑定事件
   let linkListAry = [...linkList];
   forEach(linkListAry, function (item, index) {
-    item.flag = -1;
+    item.flag = -1; // 自定义flag属性，用以表示当前排序是升序或降序
     item.onclick = function () {
       // 重置非当前点击维度的flag值
       forEach(linkListAry, (item) => {
