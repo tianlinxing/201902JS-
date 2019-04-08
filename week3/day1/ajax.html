@@ -14,12 +14,16 @@
   // ajax请求实例
   let xhr = new XMLHttpRequest()
 
-  xhr.open('GET', 'https://www.easy-mock.com/mock/5b1e1a71d4a14a3247a6cdb9/moveList', false)
+  // 猫眼接口：https://box.maoyan.com/promovie/api/box/second.json
+  // 自己的接口：https://www.easy-mock.com/mock/5b1e1a71d4a14a3247a6cdb9/moveList
+
+  const url = 'https://www.easy-mock.com/mock/5b1e1a71d4a14a3247a6cdb9/moveList'
+
+  xhr.open('GET', url, false)
   let data = {}
   // 监听请求响应
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log(JSON.parse(xhr.responseText))
       data = JSON.parse(xhr.responseText)
     }
   }
