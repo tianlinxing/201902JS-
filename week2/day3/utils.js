@@ -16,7 +16,7 @@ window._utils = (function(){
 
   // Array.from()
   return {
-    likeToArray: likeToArray
+    likeToArray // likeToArray: likeToArray
   }
 
 })()
