@@ -10,20 +10,23 @@
 <body>
 <script>
 
+
   // ajax请求实例
   let xhr = new XMLHttpRequest()
 
-  xhr.open('GET', 'https://www.easy-mock.com/mock/5b1e1a71d4a14a3247a6cdb9/moveList', true)
-
+  xhr.open('GET', 'https://www.easy-mock.com/mock/5b1e1a71d4a14a3247a6cdb9/moveList', false)
+  let data = {}
   // 监听请求响应
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       console.log(JSON.parse(xhr.responseText))
+      data = JSON.parse(xhr.responseText)
     }
   }
 
   xhr.send()
 
+  console.log(data)
   console.log('hello')
 
   // 参考页面
