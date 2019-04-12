@@ -79,7 +79,7 @@ let flowRender = (function () {
       let imgOffsetTop = item.offsetTop;
       let winH = document.documentElement.clientHeight;
       let pageSctp = document.documentElement.scrollTop;
-      if (imgOffsetTop - winH - pageSctp <= 100) {
+      if (imgOffsetTop - winH - pageSctp <= -100) {
         // imgOffsetTop - winH - pageSctp === 0 说明恰好要出来了，如果小于0说明已经出来
         let newImg = document.createElement('img');
         let dataSrc = item.getAttribute('data-src');
