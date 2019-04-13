@@ -32,6 +32,8 @@ let forEach = (ctx = [], cb) => {
   })
 };
 
+let breakDom = (dom, num) => {}
+
 
 // 获取元素对象
 let headerBox = eleById('header');

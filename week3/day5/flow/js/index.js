@@ -99,7 +99,7 @@ let flowRender = (function () {
         loadMore();
         lazyLoad();
       }
-    }
+     }
   }
 })();
 flowRender.init();

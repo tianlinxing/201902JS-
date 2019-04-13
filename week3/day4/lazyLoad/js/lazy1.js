@@ -25,6 +25,10 @@ btn.onclick = function () {
   img.onload = function () {
     // onload 事件会在img图片下载完成后触发，所以我们可以在onload事件中设置img的类名，此时就可以实现在图片下载完成后再设置类名show
     this.className = 'show'
+  };
+  img.onerror = function () {
+    // 一旦图片加载失败就会触发onerror事件，我们可以在这个事件函数中提示用户，以提升用户体验。
+    alert('加载失败了')
   }
 };
 
