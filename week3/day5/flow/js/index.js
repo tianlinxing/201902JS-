@@ -65,7 +65,7 @@ let flowRender = (function () {
     let pageH = document.documentElement.offsetHeight;
     let winScrlTop = document.documentElement.scrollTop;
 
-    if ((pageH - winScrlTop - winH) <= 300) {
+    if ((pageH - winScrlTop - winH) <= 100) {
       queryData();
     }
   };
@@ -79,7 +79,7 @@ let flowRender = (function () {
       let imgOffsetTop = item.offsetTop;
       let winH = document.documentElement.clientHeight;
       let pageSctp = document.documentElement.scrollTop;
-      if (imgOffsetTop - winH - pageSctp <= -100) {
+      if (imgOffsetTop - winH - pageSctp <= 100 && !item.src) {
         // imgOffsetTop - winH - pageSctp === 0 说明恰好要出来了，如果小于0说明已经出来
         let newImg = document.createElement('img');
         let dataSrc = item.getAttribute('data-src');
