@@ -39,10 +39,9 @@ let flowRender = (function () {
 					? li.innerHTML += queryHTML(dataArr[liIndex])
 					: null;
 			});
-			isRun = false;
-
 		}
-	}
+    isRun = false;
+  }
 
 	// 3. 拼接模板字符串
 	function queryHTML({link, pic, title}) {
