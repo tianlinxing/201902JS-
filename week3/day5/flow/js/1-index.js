@@ -74,8 +74,8 @@ let bindHTML = () => {
       <span>${item3.title}</span>
     </a>`
     }
-    isRun = false; // 在这里将isRun置为false表示本次数据请求和绑定已经完成（你可以进行下一次请求了）
-  } 
+  }
+  isRun = false; // 在这里将isRun置为false表示本次数据请求和绑定已经完成（你可以进行下一次请求了）
 };
 bindHTML();
 lazyLoad();
@@ -95,8 +95,8 @@ window.onscroll = function () {
   if (pageH - winScrollTop - winH <= 100) { // 为了提升用户体验，我们在距离底部还有一段距离时就去请求
     if (isRun) return; // isRun 为true表示当前有正在进行的数据请求，所以不能进行下一次请求了
     isRun = true; // 置为true表示当前有正在进行的数据请求。
-    // queryData();
-    // bindHTML();
+    queryData();
+    bindHTML();
   }
 };
 
