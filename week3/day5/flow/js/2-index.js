@@ -7,6 +7,7 @@ let flowRender = (function () {
 	let queryData = () => {
 		if (page > 3) {
 			alert('没有更多数据了！');
+			window.onscroll = null;
 			return;
 		}
 		isRun = true;
