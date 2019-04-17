@@ -30,7 +30,7 @@
 
     // 过渡时间
     const duration = 2000
-    
+
     // 目标值
     const targetLeft = 500
     const targetTop = 600
@@ -64,7 +64,7 @@
       // 根据当前时间 计算出 当前的left值和top值
       let curLeft = linear(time, beginLeft, changeLeft, duration)
       let curTop = linear(time, beginTop, changeTop, duration)
-      
+
       css(box, {
         left: curLeft,
         top: curTop
@@ -72,9 +72,6 @@
     }, interval)
 
 
-
-
- 
     /** 匀速运动公式
       * @param t 当前时间
       * @param b 起始位置
