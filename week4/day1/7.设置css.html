@@ -25,7 +25,7 @@
       //   let reg =/(width|height)|(margin|padding)?(top|left|bottom|right)?/i
       //   if (reg.test(attr)) {
       //     if (!isNaN(value)) {
-      //       value += 'px' 
+      //       value += 'px'
       //     }
       //   }
       //   ele.style[attr] = value;
@@ -45,13 +45,13 @@
       //   // 把一些常见样式属性自动添加单位
       //   // width height margin padding marginTop paddingTop
       //   // left top right bottom
-      //   let reg =/(width|height)|(margin|padding)?(top|left|bottom|right)?/i
+      //   let reg =/^(width|height)|((margin|padding)?(top|left|bottom|right)?)$/i
 
       //   // 是否是需要加单位属性
       //   if (reg.test(attr)) {
       //     // 这个value是否已经有单位
       //     if (!isNaN(value)) { // 是有效数字需要 加单位
-      //       value += 'px' 
+      //       value += 'px'
       //     }
       //   }
       //   ele.style[attr] = value;

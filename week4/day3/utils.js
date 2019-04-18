@@ -79,12 +79,12 @@ window._utils = (() => {
 
     // 去单位处理 '10px' '0.3'
     var reg = /^[-+]?(\d|[1-9]\d+)(\.\d+)?(px|pt|em|rem)?/
-    
+
     // if (reg.test(value)) {
     //   value = parseFloat(value)
     // }
     reg.test(value) && (value = parseFloat(value))
-    
+
     return value
   }
 
@@ -102,8 +102,8 @@ window._utils = (() => {
     }
 
     // 自动加单位 width height margin padding left right top bottom
-    var reg = /(width|height)|(margin|padding)?(top|left|right|bottom)?/i
-    if (reg.test(value)) {
+    var reg = /^(width|height|((margin|padding)?(top|left|right|bottom)?))$/i
+    if (reg.test(attr)) {
       // !isNaN(value) => true 是有效数字 需要加单位
       !isNaN(value) && (value += 'px')
     }
@@ -112,8 +112,8 @@ window._utils = (() => {
 
   /**
    * 批量设置样式
-   * @param {object} ele 元素对象 
-   * @param {object} obj 样式属性对象 
+   * @param {object} ele 元素对象
+   * @param {object} obj 样式属性对象
    */
   function setCssBatch(ele, obj) {
     if (typeof obj !== 'object') return
@@ -126,10 +126,10 @@ window._utils = (() => {
   }
 
   /**
-   * 
+   *
    * @param {object} ele 元素对象
-   * @param {string|object} param 
-   * @param {any} val 
+   * @param {string|object} param
+   * @param {any} val
    */
   function css(ele, param, val) {
     if (typeof param === 'object') {
