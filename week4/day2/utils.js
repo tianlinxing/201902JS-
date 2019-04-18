@@ -102,7 +102,7 @@ window._utils = (() => {
     }
 
     // 自动加单位 width height margin padding left right top bottom
-    var reg = /^(width|height|((margin|padding)?(top|left|right|bottom)?))$/i
+    var reg = /^(width|height|(margin|padding)?(top|left|right|bottom)?)$/i
     if (reg.test(attr)) {
       // !isNaN(value) => true 是有效数字 需要加单位
       !isNaN(value) && (value += 'px')
