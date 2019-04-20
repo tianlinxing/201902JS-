@@ -16,16 +16,6 @@
 *
 *
 *
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
 * */
 
 /*
@@ -33,4 +23,85 @@
 *   1. 绑定数据
 *   2. 实现轮播
 * */
+
+// 1. 获取元素对象
+let $container = $('.container');
+let $wrapper = $('.wrapper');
+let $focus = $('.focus');
+let $arrowLeft = $('.arrowLeft');
+let $arrowRight = $('.arrowRight');
+let $slideList = null;
+let $focusList = null;
+
+// 配置轮播所需参数
+let stepIndex = 0; // 记录当前正在轮播的图片索引，因为我们需要使用索引来控制轮播
+let autoTimer = null; // 记录定时id，以便于我们想停止轮播时可以清除定时器
+let interval = 3000; // interval 是轮播的间隔时间
+
+$.ajax({
+  url: 'json/banner.json',
+  method: 'GET',
+  async: false,
+  dataType: 'json',
+  success (data) {
+    // console.log(data);
+    bindHTML(data);
+  },
+  error: function (err) {
+    console.log(err);
+  }
+});
+
+// 2. bindHTML 绑定数据
+function bindHTML(data) {
+  // 2.1 设置基础字符串:图片的、焦点的
+  let slideStr = ``;
+  let focusStr = ``;
+  // 2.2 遍历数据 拼接html字符串
+  data.forEach((item, index) => {
+    let { img, desc } = item;
+    slideStr += `<div class="slide"><img src="${img}" alt="${desc}"></div>`
+    focusStr += `<li class="${index === 0 ? 'active' : ''}"></li>`
+  });
+
+  // 2.3 插入到页面中
+  $wrapper.html(slideStr);
+  $focus.html(focusStr);
+
+  // 2.4 重新获取$slideList $focusList
+  $slideList = $('.slide');
+  $focusList = $('.focus > li');
+
+  // 2.5 动态设置wrapper的宽度
+  $wrapper.css({
+    width: $slideList.length * 1000
+  })
+}
+
+// 3. autoMove 实现轮播切换
+function autoMove() {
+  stepIndex++; // stepIndex表示的是container正在展示的图片索引，如果想让它展示成下一张，我们需要让stepIndex++;
+
+  // 让wrapper运动到指定位置
+  $wrapper.animate({
+    left: -1 * stepIndex * 1000
+  }, 2000);
+}
+
+autoTimer = setInterval(autoMove, interval);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
