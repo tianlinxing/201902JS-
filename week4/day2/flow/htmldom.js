@@ -91,6 +91,7 @@
       const img = imgAll[i]
 
       // 避免重复加载
+  
       if (img.loaded) continue; // 忽略当前img后面的懒加载逻辑， 跳到下一次循环 对下一张图片进行懒加载
 
       // 获取图片距离body的offsetTop
@@ -111,7 +112,7 @@
 
         // 图片加载成功事件
         tempImg.onload = function() {
-          // console.log('load')
+          console.log('load')
           img.src = this.src
 
           // 标记图片已经加载
