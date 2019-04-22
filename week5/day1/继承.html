@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 面向对象 三大要素 （类 实例）
+    // 继承 子类继承父类
+    // 封装 原型属性方法 实例属性方法
+    // 多态（重写 重载）
+
+    // 继承：两个类 A B 想让B类的实例 使用A类上的属性和方法
+    // B类继承A类
+    // A类称为父类 Super(超类) B类称为子类Sub
+
+    function Super() {
+
+    }
+    A.prototype.say = () => {console.log('hi hello')}
+
+    function Sub() {
+
+    }
+    const b = new B()
+    // B类的实例 想使用A类的属性和方法
+    console.log(b.say)
+    // 原型链查找机制：对象.属性名，先看自己是否有这个私有属性，
+    // 如果没有就根据所属类的原型prototype查找原型属性，如果原型上也没有，
+    // 就根据原型对象__proto__ 一直找到 Object基类的原型为止，实在没有undefined
+
+  </script>
+</body>
+</html>
