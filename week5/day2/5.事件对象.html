@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #box {
+      width: 400px;
+      height: 400px;
+      background: red;
+      margin: 200px;
+    }
+  </style>
+</head>
+<body>
+  <!-- a标签默认行为 点击自动跳转 -->
+  <a id="link" href="https://www.baidu.com"> 跳转到百度</a>
+
+  <div id="box">点我
+    <h3 style="background: blue">hello h3</h3>
+    <h4 style="background: pink">hello h4</h4>
+  </div>
+  <div style="height: 2000px;"></div>
+  <script>
+    // 事件中的事件对象
+    // 事件对象：存储关于当前事件一些信息（事件名称 事件元素 鼠标坐标 keyCode）
+    // 当我们事件函数触发的时候，浏览默认为当前事件函数传递第一个实参
+    const box = document.getElementById('box')
+    box.onclick = function(event) { // event接收 事件对象
+      // console.log(event.offsetX, event.offsetY)
+      // console.log(event.clientX, event.clientY)
+      // console.log(event.pageX, event.pageY)
+      // const sTop = document.documentElement.scrollTop
+      // console.log(event.pageY, sTop, event.clientY )
+      // event.pageY = scrollTop + event.clientY
+      // event.pageX = scrollLeft + event.clientX
+      // console.log(event.preventDefault())
+    }
+    
+    const link = document.getElementById('link')
+    link.onclick = function(event) {
+      // 阻止a标签默认跳转行为
+      // event.preventDefault()
+      event.stopPropagation()
+      alert('跳转页面')
+    }
+
+    /** 事件对象
+     * type：事件名称
+     * target: 事件目标元素(事件是由哪个元素触发的)
+     * 
+     * // 鼠标相对于浏览器窗口左上角的坐标
+     * clientX: 相对于浏览器窗口 距离窗口左边边缘的距离 
+     * clientY: 相对于浏览器窗口 距离窗口上边边缘的距离
+     * 
+     * // 鼠标相对于body页面左上角的坐标
+     * pageX: 相对于body页面，距离body左边边缘的距离 pageX = scrollLeft + clientX
+     * pageY: 相对于body页面，距离body上边边缘的距离 pageY = scrollTop + clientY
+     * 
+     * // 鼠标相对于元素左上角的坐标
+     * offsetX: 相对于当前元素，距离元素左边边缘的距离 offsetX = pageX - offsetLeft
+     * offsetY: 相对于当前元素，距离元素上边边缘的距离 offsetY = pageY - offsetTop
+     * preventDefault()：阻止事件默认行为
+     * stopPropagation(): 阻止事件冒泡
+    */
+
+
+    // box.onmouseover = function(event) { // event接收 事件对象
+    //   console.log('over', event.type)
+    // }
+ </script>
+</body>
+</html>

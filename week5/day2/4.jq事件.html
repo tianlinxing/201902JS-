@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">sdfd</button>
+  <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+  <script>
+    $(function() {
+      // $btn 标识这是一个jq对象(jQeruy实例)
+      const $btn = $('#btn')
+      // 回调函数：把一个函数作为参数 传入到另一个函数里面执行
+
+      function click2() {
+        console.log('click2')
+      }
+      window.click2 = click2
+
+      // $btn.on('click', function() {
+      //   console.log('click1')
+      // }).click(click2)
+
+      $btn.one('click', function() {
+        console.log("one")
+      })
+
+      // 绑定事件 on('事件名称', 事件函数)
+      // 移除事件 off('事件名称'[, 事件函数])
+      // 一次性事件 one('事件名称', 事件函数)
+    })
+
+    // Angular 比较大框架 vue react
+    // Angular + jquery
+
+    // sort((a, b) => {})
+
+    box.onclick = null
+  </script>
+</body>
+</html>

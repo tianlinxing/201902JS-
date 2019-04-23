@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .outer {
+      font-size: 24px;
+      color: #ffffff;
+      box-sizing: border-box;
+      width: 500px;
+      height: 500px;
+      background: green;
+      margin: 50px auto;
+      padding: 50px;
+    }
+
+    .inner {
+      font-size: 24px;
+      color: #ffffff;
+      width: 400px;
+      height: 400px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="outer" class="outer">
+    outer
+    <div id="inner" class="inner">inner</div>
+  </div>
+  <script>
+    // 事件冒泡：
+    // 从里到外 当前元素的相关事件行为（click）触发时，
+    // 也会导致它所有上级元素的相关事件行为也会触发 一直到window为止
+
+    // 从当前元素开始 往外冒泡
+    inner.onclick = function(event) {
+      console.log('=> inner click', event.target)
+    }
+    
+    outer.onclick = function(event) {
+      console.log('=> => outer click', event.target)
+    }
+
+    document.body.onclick = function(event) {
+      console.log('=> => => body click', event.target)
+    }
+
+    document.documentElement.onclick = function(event) {
+      console.log('=> => => => html click', event.target)
+    }
+
+    document.onclick = function(event) {
+      console.log('=> => => => => documnt click', event.target)
+    }
+
+    window.onclick = function(event) {
+      console.log('=> => => => => => window click', event.target)
+    }
+  </script>
+</body>
+</html>
