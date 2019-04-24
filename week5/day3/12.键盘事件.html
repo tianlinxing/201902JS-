@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <ul id="emojis">
+ 
+      </ul>
+    <ul id="list">
+ 
+    </ul>
+  <input id="input" type="text">
+
+  <script>
+    const input = document.getElementById('input')
+    const list = document.getElementById('list')
+    let emoji = ['😀', '😁', '😂', '🤣','😃', '😄']
+    let str = ''
+    for(let i = 0; i < emoji.length; i++) {
+      str += `<li>${emoji[i]}</li>`
+    }
+    emojis.innerHTML = str
+
+    
+    for(let i = 0; i < emojis.children.length; i++) {
+      emojis.children[i].onclick = function() {
+        console.log(this.innerHTML)
+        input.value += this.innerHTML
+      }
+    }
+
+    input.onkeydown = function(event) {
+      if (event.keyCode === 13) { // enter 13
+         let li = document.createElement('li')
+         li.innerHTML = this.value
+         list.appendChild(li)
+         this.value = ''
+      }
+    }
+
+    // onkeyup onkeydown onkeypress
+    // input.onkeydown = function (event) {
+    //   // event.keyCode
+    //   console.log(event.keyCode)
+    //   // console.log('字符', String.fromCharCode(event.keyCode))
+    // }
+  </script>
+</body>
+</html>

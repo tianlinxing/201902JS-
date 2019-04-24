@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">点我</button>
+  <script>
+    // DOM0级事件绑定（只有冒泡阶段）
+    // 元素.onclick = fn
+    // 移除事件
+    // 元素.onclick = null
+
+    // btn.onclick = function() {
+    //   console.log('DOM0级事件绑定1')
+    // }
+    
+    // btn.onclick = function() {
+    //   console.log('DOM0级事件绑定2')
+    // }
+
+
+    // 事件冒泡（从里到外） 捕获（从外到里）
+    // DOM2级事件绑定 on off
+    // 元素.addEventListener('事件名称', 事件函数, false冒泡|true捕获)
+    // 元素.removeEventListener('事件名称', 事件函数, false冒泡|true捕获)
+
+    // const fn = function (event) {
+    //   console.log('DOM2级事件绑定1', event)
+    // }
+
+    // btn.addEventListener('click', fn, false)
+    // btn.addEventListener('click', fn, false)
+    // btn.addEventListener('click', fn, false)
+
+    // btn.addEventListener('click', function () {
+    //   console.log('DOM2级事件绑定2', event)
+    // }, false)
+   
+    // removeEventListener 必须两个参数 1.事件名称 2.事件函数名称
+    // 第三个参数 不写或为false 移除的是冒泡阶段绑定的函数
+    // 第三个参数 为true 移除的是捕获阶段绑定的函数
+    // btn.removeEventListener('click',  fn, false)
+
+    // DOM0级事件绑定 DOM2级事件绑定
+    // 1.DOM0级事件只有冒泡阶段，DOM2级事件第三个参数 false冒泡阶段 true捕获阶段
+    // 2.DOM2级事件可以绑定多个事件函数
+    // 3.DOM2级事件给同一个事件行为 多次重复绑定同一个事件函数 只会绑定一次
+    // const fn = function (event) {
+    //   console.log('DOM2级事件绑定1', event)
+    // }
+
+    // btn.addEventListener('click', fn, false)
+    // btn.addEventListener('click', fn, false)
+    // btn.addEventListener('mouseover', fn, false)
+
+    
+  </script>
+</body>
+</html>
