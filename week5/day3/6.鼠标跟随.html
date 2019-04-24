@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #box {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      border: 2px solid red;
+      margin: 30px auto;
+    }
+
+    #mask {
+      display: none;
+      cursor: move;
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* width: 100px;
+      height: 100px; */
+      background: rgba(0, 0, 0, .3);
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div id="mask" style="width: 100px; height: 100px"></div>
+  </div>
+  <script>
+    const $ = selector => document.querySelector(selector)
+    const box = $('#box')
+    const mask = $('#mask')
+
+    box.onmouseenter = function() {
+      mask.style.display = 'block'
+    }
+
+    box.onmouseleave = function() {
+      mask.style.display = 'none'
+    }
+
+    // 当元素隐藏的时候 display: none 获取不到盒模型属性的 offsetWidth offsetHeight 0
+
+    // offsetX = pageX - ele.offsetLeft - ele.clientLeft
+    // offsetY = pageY - ele.offsetTop - ele.clientTop
+    const minL = 0
+    const minT = 0
+    const wid = parseFloat(mask.style.width)
+    const hei = parseFloat(mask.style.height)
+
+    const maxL = box.clientWidth - wid
+    const maxT = box.clientHeight - hei
+  
+    box.onmousemove = function ({pageX, pageY}) {
+      const { offsetLeft, offsetTop } = this
+      let l = pageX - offsetLeft - wid / 2
+      let t = pageY - offsetTop - hei / 2
+
+      l < 0 && (l = 0)
+      t < 0 && (t = 0)
+
+      l > maxL && (l = maxL)
+      t > maxT && (t = maxT)
+
+      mask.style.left = l + 'px'
+      mask.style.top = t + 'px'
+    }
+  </script>
+</body>
+</html>
