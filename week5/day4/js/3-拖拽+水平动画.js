@@ -60,6 +60,7 @@ function dragMove(e) {
 }
 function dragEnd(e) {
   document.removeEventListener('mousemove', this.DRAGM, false);
+  document.removeEventListener('mouseup', this.DRAGM, false);
 
   this.flyTimer = setInterval(() => fly.call(this), 20); // 执行水平方向的动画
   // 计算盒子可以移动的最大left值
