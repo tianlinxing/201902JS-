@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.drag-obj {
+			width: 100px;
+			height: 100px;
+			background: #00b38a;
+			position: relative; /*position: static; static是定位属性的默认值*/
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+<body>
+<div id="dragObj" class="drag-obj" style="left: 0;top: 0;"></div>
+<script src="js/2-封装订阅发布.js"></script>
+<script src="js/3-动画+发布订阅.js"></script>
+</body>
+</html>
