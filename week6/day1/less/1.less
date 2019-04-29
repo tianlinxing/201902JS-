@@ -1,0 +1,69 @@
+@w:200px;// 声明一个变量
+@img:'../img'; // 路径
+@name:qqq; // 类名
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.qqq_@{name}{
+    width: @w;
+    height: @w/2;
+}
+.public{
+    width: 200px;
+    height: 300px;
+    background: #ccc;
+    div{
+        font-size: 100px;
+    }
+}
+// 混合
+// ul:extend(.public){
+// 和 直接用 点的区别 在于 是否使用后代样式 
+.q(@a:100px,@b:100px){
+    width: @a;
+    height: @b;
+}   
+ul{
+    // .public;
+    .q();
+    border:1px solid #ccc;
+    margin: auto;
+    background: url('@{img}/1.png');
+    li{
+        color: aqua;
+        width:@w;
+        display: inline-block;
+        >a{
+            font-size:20px;
+            color:rgb(86, 65, 206)
+        }
+    }
+    li:nth-child(2n){
+        background: #ccc
+    }
+    li:nth-child(2n+1){
+        background: rgb(243, 148, 148)
+    }
+    &::after{
+        // & 代表父亲节点
+        content: 'hello'
+    }
+}
+
+// 循环
+.ww(@n) when (@n< 5){
+    .qqq_@{n}{
+        width: 100px * @n
+    };
+    .ww(@n+1);
+}
+.ww(1);
+.www(@n) when(@n<100){
+    .pad_@{n}{
+        padding:1px * @n
+    };
+    .www(@n+1)
+}
+.www(1);

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        header main  footer 
+        nav
+    -->
+    <!-- <progress></progress>
+    <input type="color" id='inp'>
+    <h2 id='h2'>珠峰培训</h2>
+    <input type="file">
+    <input type="date">
+    <input type="range">
+
+    <input type="text" list='qqq'>
+    <datalist id='qqq'>
+        <option value="1">q</option>
+        <option value="21">q2</option>
+        <option value="32">q3</option>
+        <option value="42">q4</option>
+    </datalist> -->
+
+    <input type="text" id='inp2'>
+    <ul id='ul_box'>
+        <li></li>
+    </ul>
+    
+    <button id='btn'>按钮</button>
+    <audio src='../../../11.m4a' id='audio'></audio>
+    <!-- <video controls src="http://flv.bn.netease.com/videolib3/1610/21/kByxD4481/HD/kByxD4481-mobile.mp4"></video> -->
+</body>
+</html>
+<script>
+    // 思路  获取  input 的 value ；
+    // 然后把 value 赋给  h2的color;
+    // onchange 只有当内容改变 并且失去焦点是才会触发；
+    // inp.onchange = function(e){
+    //     // e = e || window.event;
+    //     // let target = e.target || e.srcElement;
+    //     // h2.style.color = target.value;
+    //     h2.style.color = this.value;
+    // }
+    let ary = [
+        {value:111,text:'qqq'},
+        {value:21,text:'www'},
+        {value:31,text:'eee'}
+    ];
+    function giveHtml(arr) {
+        // 放 li
+        let str = '';
+        arr.forEach(item => {
+            str += `<li>${item.text}</li>`
+        });
+        ul_box.innerHTML = str;
+    }
+    inp2.onfocus = function(){
+        // 获取焦点
+        ul_box.style.display = 'block';
+        giveHtml(ary);
+    }
+    inp2.onblur = function(){
+        // 失去焦点
+        ul_box.style.display = 'none';
+    }
+    inp2.oninput = function () {
+        //
+        let arr = ary.filter(item=>{
+            let inpV = this.value;
+            // return item.value.toString().indexOf(inpV) == -1 ? false : true;
+            return (item.value+'').includes(inpV)
+        });
+        giveHtml(arr);
+    }
+
+    let isPlay = false;
+    btn.onclick = function(){
+        console.dir(audio)
+        // paused  如是true 代表停着
+        // if(audio.paused){
+        //     audio.play()
+        // }else{
+        //     audio.pause()
+        // }
+        if(isPlay){
+            audio.pause();
+            isPlay = false;
+        }else{
+            audio.play();
+            isPlay = true;
+        }
+
+    }
+
+    //navigator  获取设备信息的一个属性
+    //hybird     混合APP开发;  webview
+
+</script>
