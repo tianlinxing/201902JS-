@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div,img {
+            width: 200px;
+            height: 400px;
+            background: #ccc;
+            margin: auto;
+            transition: all 1s;
+            transform-origin:center center;
+        }
+        div:hover img{
+            /* transform:  skewX(30deg); */
+            /* skewX()  横轴拉伸*/
+            /* transform: rotate(90deg) skew(30deg); */
+            /* transform: scale(0.5); */
+            transform: translateY(30px)
+        }
+        .www{
+            width: 600px;
+            height: 600px;
+            background: #ccc;
+            position: relative;
+        }
+        .qq{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 50%;/* 父盒子宽度的 50%*/
+            transform: translateX(-50%) /*自己宽度的50%*/
+            /* JS 的 offsetLeft 不会包含 translate的移动 */
+            /* offsetLeft 在table 中的bug */
+        }
+    </style>
+</head>
+
+<body>
+    <div class='box1'>
+        <img src="http://cms-bucket.ws.126.net/2019/04/30/428a0efac9854987b3c7d38533e38f65.jpeg" alt="">
+    </div>
+    <div class="www">
+        <div class="qq"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 关键帧 动画 */
+        @keyframes qqq {
+            from {
+                transform: translateX(0)
+            }
+
+            50% {
+                transform: translateX(100px)
+            }
+
+            to {
+                transform: translateX(0)
+            }
+        }
+
+        @keyframes www {
+            0% {}
+
+            100% {}
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            animation: qqq 2s 2s infinite linear;
+        }
+
+        .music_icon {
+            width: 50px;
+            height: 50px;
+            background: url(./qqq.svg) center center;
+            background-size: contain;
+            /* 
+                contain : 保证图片完全显示
+                cover: 保证不露白； 但是会隐藏一部分图片
+            */
+            animation: zoomOutUp 1s linear infinite;
+        }
+
+        @-webkit-keyframes zoomOutUp {
+            40% {
+                opacity: 1;
+                -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+                transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+                -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+                animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            }
+
+            to {
+                opacity: 0;
+                -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);
+                transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);
+                -webkit-transform-origin: center bottom;
+                transform-origin: center bottom;
+                -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+                animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+            }
+        }
+
+        @keyframes zoomOutUp {
+            40% {
+                opacity: 1;
+                -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+                transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+                -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+                animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            }
+
+            to {
+                opacity: 0;
+                -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);
+                transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);
+                -webkit-transform-origin: center bottom;
+                transform-origin: center bottom;
+                -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+                animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+            }
+        }
+
+        @-webkit-keyframes swing {
+            20% {
+                -webkit-transform: rotate3d(0, 0, 1, 15deg);
+                transform: rotate3d(0, 0, 1, 15deg);
+            }
+
+            40% {
+                -webkit-transform: rotate3d(0, 0, 1, -10deg);
+                transform: rotate3d(0, 0, 1, -10deg);
+            }
+
+            60% {
+                -webkit-transform: rotate3d(0, 0, 1, 5deg);
+                transform: rotate3d(0, 0, 1, 5deg);
+            }
+
+            80% {
+                -webkit-transform: rotate3d(0, 0, 1, -5deg);
+                transform: rotate3d(0, 0, 1, -5deg);
+            }
+
+            to {
+                -webkit-transform: rotate3d(0, 0, 1, 0deg);
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+        }
+
+        @keyframes swing {
+            20% {
+                -webkit-transform: rotate3d(0, 0, 1, 15deg);
+                transform: rotate3d(0, 0, 1, 15deg);
+            }
+
+            40% {
+                -webkit-transform: rotate3d(0, 0, 1, -10deg);
+                transform: rotate3d(0, 0, 1, -10deg);
+            }
+
+            60% {
+                -webkit-transform: rotate3d(0, 0, 1, 5deg);
+                transform: rotate3d(0, 0, 1, 5deg);
+            }
+
+            80% {
+                -webkit-transform: rotate3d(0, 0, 1, -5deg);
+                transform: rotate3d(0, 0, 1, -5deg);
+            }
+
+            to {
+                -webkit-transform: rotate3d(0, 0, 1, 0deg);
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+        }
+
+        @keyframes musicM {
+            from {
+                transform: rotate(0)
+            }
+
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @-webkit-keyframes zoomIn {
+            from {
+                opacity: 0;
+                -webkit-transform: scale3d(0.3, 0.3, 0.3);
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                -webkit-transform: scale3d(0.3, 0.3, 0.3);
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes rollIn {
+            from {
+                opacity: 0;
+                -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+                transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+            }
+
+            to {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes rollIn {
+            from {
+                opacity: 0;
+                -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+                transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+            }
+
+            to {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+
+    <div class="music_icon"></div>
+</body>
+
+</html>
+<script>
+    let m = document.querySelector('.music_icon');
+    let isTurn = true;
+    m.onclick = function () {
+        if (isTurn) {
+            this.style.animationPlayState = 'paused';
+            isTurn = false;
+        } else {
+            this.style.animationPlayState = 'running';
+            isTurn = true;
+        }
+    }
+</script>

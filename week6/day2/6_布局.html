@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size:100px">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:2rem;
+            height:3rem;
+            background: red
+        }
+        .qqq{
+            /* width: 300px;
+            height: 400px; */
+            width:5rem;
+            height: 10rem;
+            background: #ccc;
+        }
+        @media all and (max-width:600px){
+            /* 屏宽 300一下的屏幕 下边的样式起作用 */
+            .qqq{
+                width: 200px;
+                height: 200px;
+                background: red;
+            }
+        }
+        @media all and (max-width:300px){
+            /* 屏宽 300一下的屏幕 下边的样式起作用 */
+            .qqq{
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+        }
+        /* 媒体查询 */
+        
+    </style>
+</head>
+<body>
+    <div class="qqq">
+        你好 珠峰
+    </div>
+    <!-- <h2> html<h2>em</h2></h2> -->
+
+    <div style='font-size: 20px'>
+        <p style='height: 5em'>您好</p>
+    </div>
+
+    <div class="box">
+        <!-- 
+            设计稿上 宽是  200px  高是 300px 
+
+            .box{
+                width:2rem;
+                height:3rem;
+            }
+        -->
+    </div>
+</body>
+</html>
+<script>
+    // root
+    // rem  本质是一种比例关系；依赖的是  html标签的font-size属性的值
+    // em  也是一个比例， 依赖的是  父盒子的 font-size；
+    // px
+    // 移动端布局  用 rem 
+
+    // 750px 的设计稿
+    // 200px  2rem
+    /*
+        750               w
+        100    1rem       x(html的font-size)
+
+
+
+        x = 100 * w / 750
+
+        // 这个公式 可以保证  设计稿的 像素 /100 就是我们自己css设置的rem值
+    */
+    let w = document.documentElement.clientWidth || document.body.clientWidth;
+    let x = w / 750 * 100  ;
+    document.documentElement.style.fontSize = x + 'px';
+    
+    
+</script>

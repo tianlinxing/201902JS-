@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* .outer{
+            margin: 20px auto;
+            width: 500px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ccc;
+        }
+        .inner{
+            display: inline-block
+        } */
+        .outer{
+            margin: 20px auto;
+            width: 500px;
+            height: 500px;
+            position: relative;
+            background: red
+        }
+        .inner{
+            display: inline-block;
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        /* 
+            flex布局；父盒子 210px ;3个儿子 宽度分别是 20，30，40；
+            问第一个盒子的扩展宽度？
+        */
+        .box{
+            display: flex;
+            width: 270px;
+            height: 50px;
+
+        }
+        /* 
+            270 - 20 - 30 - 40 = 180
+            180 / 3 = 60;
+            20 + 60 = 80
+            30 + 60 = 90
+            40 + 60 = 100
+        */
+        .box div:nth-child(1){
+            width: 20px;/*80*/
+            background: red;
+            flex: auto
+        }
+        .box div:nth-child(2){
+            width: 30px;/*90*/
+            background: blue;
+            flex: auto
+        }
+        .box div:nth-child(3){
+            width: 40px;/*100*/
+            background: yellow;
+            flex: auto
+        }
+    </style>
+</head>
+<body>
+    <div class='outer'>
+        <div class="inner">
+            哈哈哈哈
+        </div>
+    </div>
+
+    <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
