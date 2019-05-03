@@ -25,15 +25,42 @@
 
             document.body.ontouchstart = function (e) {
                 this.startY = e.changedTouches[0].pageY; // 手指按下时 的 手指的位置；
+                this.startT = parseFloat($listBox.css('top'))
+                // 因为  $listBox.css('top')的值有px单位
+
+                $listBox.css({transition:'none'})// 再手指按下时 移除过渡动效；
             }
-            document.body.ontouchmove = function (e) {
-                // 为了方便 move触发，绑定到 body上；
-                //根据手指移动的距离 来决定 list盒子的top值；
-                //
-                console.log(e.changedTouches[0])
-                e.changedTouches[0].pageY // 手指移动时 的 手指的位置；
-                console.log(e.changedTouches[0].pageY - this.startY);
+            // document.body.ontouchmove = function (e) {
+            //     // 为了方便 move触发，绑定到 body上；
+            //     //根据手指移动的距离 来决定 list盒子的top值；
+            //     //
+            //     console.log(e.changedTouches[0])
+            //     e.changedTouches[0].pageY // 手指移动时 的 手指的位置；
+            //     console.log(e.changedTouches[0].pageY - this.startY);
+            //     this.changeY = e.changedTouches[0].pageY - this.startY;
+            //     $listBox.css({top:this.changeY})
+            // }
+            document.body.addEventListener('touchmove',function (e) {
+                // 因为我们需要阻止 页面滚动行为
+                e.preventDefault();
+                this.changeY = e.changedTouches[0].pageY - this.startY;
+                // changeY是 盒子高度的改变值；
+                // 想给盒子设置高度，需要再他原有的基础上 加 改变的值；
+                $listBox.css({top:this.changeY + this.startT});
+                let t = this.changeY + this.startT;
+                // let n = Math.round(t/50);
+                this.n = Math.round(t/50);
+                console.log(this.n);
+                let m = Math.abs(this.n);// m 就是当前要显示的li的索引；
+                // $lis[m] $lis.eq(m)
+                $lis.eq(m).addClass('current').siblings().removeClass('current');
+            },{passive:false});
+
+            document.body.ontouchend = function(e){
+                $listBox.css({top:50*this.n,transition:'top 0.1s'})
+                // this.n 就是索引的相反数
             }
+
     </script>
 </body>
 </html>

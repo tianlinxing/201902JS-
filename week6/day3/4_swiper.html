@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+    <title>Document</title>
+    <style>
+        .swiper-container{
+            width: 400px;
+            height: 400px;
+        
+        }
+        img{
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="https://k.sinaimg.cn/n/blogapp/transform/310/w710h400/20190502/AtIP-hwfpcxn5196302.jpg/w710h400z1l50t1f93.jpg?by=comos" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="https://k.sinaimg.cn/n/news/transform/310/w710h400/20190502/MTfh-hwfpcxn4972811.jpg/w710h400z1l50t1f6d.jpg?by=comos" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="https://k.sinaimg.cn/n/news/310/w710h400/20190503/yxYk-hwfpcxn6803995.jpg/w710h400z1l50t1e1e.jpg?by=comos" alt="">
+            </div>
+        </div>
+    </div>
+    <script>
+        let swiper = new Swiper('.swiper-container',{
+            // autoplay:true, // 自动播放
+            loop:true, // 循环播放
+            autoplay: {
+                disableOnInteraction: false,
+                delay:2000
+            },
+        });
+    </script>
+</body>
+
+</html>
