@@ -142,11 +142,101 @@ a {
             }
         }
         .tab_body{
+            padding-top: 0.2rem;
             .banner_box{
                 width: 100%;
-                height: 4rem;
+                height: 3.4rem;
+                .container{
+                    height: 100%;
+                }
                 img{
                     width: 100%;
+                }
+                .swiper-pagination{
+                    color:#fff;
+                    font-size: 0.4rem;
+                    position: absolute;
+                    bottom:0.2rem;
+                    text-align: right;
+                    padding-right:0.2rem;
+                    box-sizing: border-box; 
+                    .swiper-pagination-current{
+                        font-size: 0.5rem;
+                    }
+                }
+            }
+            .list_box{
+                li{
+                    border-bottom:0.01rem solid #ccc;
+                    font-size: 0.25rem;
+                    padding: 0.2rem 0;
+                    p{
+                        font-size: 0.34rem;
+                    }
+                    .comment_box{
+                        text-align: right;
+                        box-sizing: border-box;
+                        padding-right: 0.2rem;
+                        span:nth-child(1){
+
+                        }
+                    }
+                }
+                .none_pic{
+                    
+                }
+                .one_pic{
+                    display: flex;
+                    .img_box{
+                        width: 2rem;
+                        height: 1.8rem;
+                        overflow: hidden;
+                        background: #37a6f2;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                    .content_box{
+                        flex: 1;
+                        height: 1.8rem;
+                        position: relative;
+                        .comment_box{
+                            position: absolute;
+                            bottom: 0;
+                            width: 100%;
+                        }
+                    }
+                }
+                .two_pic{
+                    display: flex;
+                    .img_box{
+                        flex: 1;
+                        background: #2fa4f2;
+                        justify-content: space-between;
+                        height: 2.35rem;
+                        img{
+                            width: 3.5rem;
+                        }
+                    }
+                    .img_box:nth-child(1){
+                        margin-right: 0.2rem;
+                    }
+                }
+                .three_pic{
+                    .three_box{
+                        display: flex;
+                        .img_box{
+                            flex: 1;
+                            height: 1.8rem;
+                            background: #6bb0e7;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .img_box:nth-child(2){
+                            margin: 0 0.1rem;
+                        }
+                    }
                 }
             }
         }

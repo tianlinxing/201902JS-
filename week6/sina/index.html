@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../font.css">
     <!--  为了使用 新浪的 字体图标 -->
-    <link rel="stylesheet" href="./css/index.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
     <title>Document</title>
     <script>
         // 750/100 = w / x
-        let x = 100 * (document.documentElement.clientWidth||document.body.clientWidth) / 750;
+        let x = 100 * (document.documentElement.clientWidth || document.body.clientWidth) / 750;
         document.documentElement.style.fontSize = x + 'px';
         // 前提是 有 meta viewport
     </script>
     <script src="./js/zepto.js"></script>
 </head>
+
 <body>
     <section class='app'>
         <header class="header_box cl">
@@ -56,27 +59,67 @@
         <section class='content_box'>
             <div class='tab_box'>
                 <ul class='tab'>
-                    <li>今日要闻</li>
+                    <li class="current">今日要闻</li>
                     <li>精选美图</li>
-                    <li  class="current">精选视频</li>
+                    <li>精选视频</li>
                 </ul>
             </div>
             <div class='tab_body news_box'>
                 <div class="banner_box">
                     <div class="swiper-container container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="https://k.sinaimg.cn/n/blogapp/transform/310/w710h400/20190502/AtIP-hwfpcxn5196302.jpg/w710h400z1l50t1f93.jpg?by=comos" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="https://k.sinaimg.cn/n/news/transform/310/w710h400/20190502/MTfh-hwfpcxn4972811.jpg/w710h400z1l50t1f6d.jpg?by=comos" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="https://k.sinaimg.cn/n/news/310/w710h400/20190503/yxYk-hwfpcxn6803995.jpg/w710h400z1l50t1e1e.jpg?by=comos" alt="">
-                            </div>
+
                         </div>
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
+                <ul class="list_box">
+                    <li class='none_pic'>
+                        <p>哈哈哈哈</p>
+                        <div class="comment_box">
+                            <span>123</span>
+                            <span class='icon_com'></span>
+                        </div>
+                    </li>
+                    <li class="one_pic">
+                        <div class="img_box">
+                            <img src="###" alt="图片">
+                        </div>
+                        <div class="content_box">
+                            <p>哈哈哈哈</p>
+                            <div class="comment_box">
+                                <span>123</span>
+                                <span class='icon_com'></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="two_pic">
+                        <div class="img_box">
+                            <img src="##" alt="">
+                        </div>
+                        <div class="img_box">
+                            <img src="##" alt="">
+                        </div>
+                    </li>
+                    <li class="three_pic">
+                        <p>hahahah</p>
+                        <div class='three_box'>
+                            <div class="img_box">
+                                <img src="" alt="">
+                            </div>
+                            <div class="img_box">
+                                <img src="" alt="">
+                            </div>
+                            <div class="img_box">
+                                <img src="" alt="">
+                            </div>
+                        </div>
+                        <div class="comment_box">
+                            <span>123</span>
+                            <span class='icon_com'></span>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class='tab_body pic_box hide'>2</div>
             <div class="tab_body video_box hide">3</div>
@@ -84,4 +127,5 @@
     </section>
     <script src="./js/index.js"></script>
 </body>
+
 </html>
