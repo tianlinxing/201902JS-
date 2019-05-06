@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            常见的异步操作： 定时器  ajax请求
+            发现是异步， 则放到等待队列
+            主队列执行同步代码；
+            等待队列中的代码 需要等待 主队列执行完毕才能执行
+        
+        */
+        setTimeout(() => {
+           console.log(2) 
+        }, 100);
+        // for(let i = 0; i < 99999999; i++){}
+        // while (true) {
+            
+        // }
+        // console.log(1)
+
+        // Promise 是es6 新增的一个类；
+        let p = new Promise(function (resolve1,reject1) {
+            // resolve1 是成功的回调
+            // reject1  是失败的回调 
+            console.log(123);
+            reject1();
+            resolve1();
+            // resolve1和reject1只会执行一个
+        });
+        // then 有两个实参； 分别对应 resolve1  和  reject1
+        p.then(function(){
+            console.log('我是成功函数')
+        },function(){
+            console.log('我是失败函数')
+        })
+
+        // 回调地狱
+        $.ajax({
+            success:function(){
+                $.ajax({
+                    success:function(){
+
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>

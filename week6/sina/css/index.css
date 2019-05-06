@@ -3,11 +3,21 @@
   padding: 0;
   list-style: none;
 }
-a {
-  text-decoration: none;
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.2rem;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 100;
 }
 .hide {
-  display: none;
+  display: none !important;
+}
+a {
+  text-decoration: none;
 }
 .cl::after {
   display: block;
