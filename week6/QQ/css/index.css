@@ -71,8 +71,14 @@ body {
   box-sizing: border-box;
   overflow: hidden;
 }
+#app .content_box .lyric_box {
+  transition: all 1s;
+}
 #app .content_box .lyric_box p {
-  height: 0.66666667rem;
+  padding: 0.26666667rem 0;
+}
+#app .content_box .lyric_box p.active {
+  color: #1dff72;
 }
 #app .footer_box {
   position: absolute;

@@ -43,6 +43,47 @@
             </div>
         </footer>
     </section>
+    <audio src="./imgs/thatGirl.m4a" id='audio' preload="auto"></audio>
     <script src="./js/index.js"></script>
 </body>
 </html>
+<script>
+    /*
+        做布局时把内容盒子的高度是用 JS 算出来的；
+        先处理了按钮的旋转
+        加音乐
+        使用了Promise+ajax 获取歌词
+        处理歌词:  正则 + replace  ---> 拼接好的innerHTML 
+        进度条和播放时间； currentTime/duration
+        歌词的匹配： 从所有的P标签中获取符合条件的p；给这个p标签加上相应的类名；兄弟移除类名
+        歌词的移动/： 每次移动唱过歌词的高度即可；
+    */
+
+    /*
+        对H5有哪些了解？ 语义化标签  input增强  设备信息  localStorage sessionStorage 原生拖拽
+        hybird
+        css3: transition: width 1s,opacity 1s  
+              animation transform  @keyframs
+              animate.css  引入之后给对应元素加类名
+        移动端布局：媒体查询   rem (1rem=100px;  一屏10rem)  meta:viewport    
+        750/100 = w / x
+
+        一屏10rem:  @r:75rem;  100/@r
+
+        @w:200px; @img:'../img'  用法@{img}; @name:'box' @{name}
+        .w{};extend  
+        & 
+        .w(@a:200px,@b:200px){
+
+        }
+        .fn(@n) when (@n < 100){
+            .box_@{n}{
+                width:100px * @n
+            }
+            .fn(@n-1);
+        }
+        .fn(0);
+    */
+
+
+</script>

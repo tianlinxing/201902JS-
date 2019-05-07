@@ -74,8 +74,13 @@ html,body{
         box-sizing: border-box;
         overflow: hidden;
         .lyric_box{
+            transition: all 1s;
             p{
-                height: 50/@r;
+                // height: 50/@r;
+                padding: 20/@r 0;
+            }
+            p.active{
+                color:#1dff72;
             }
         }
     }
