@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href='https://www.baidu.com/s?wd=%E7%8F%A0%E5%B3%B0'>珠峰</a>
+    <a href='#css'>css</a>
+    <a href='#html'>html</a>
+    <a href='#js'>js</a>
+
+    <div>css</div>
+    <div style='display: none'>html</div>
+    <div style='display: none'>js</div>
+    <script>
+        /*
+            URL 统一资源定位符
+            URN 统一资源名称
+            URI 统一资源标识符 URI=URL + URN
+
+            URL　的组成部分
+            https://www.souyidai.com/p2p/?qwe=wer/#/bid/zt/detail/intro?id=7840004975935
+
+            // 协议 
+            http 超文本传输协议 
+            https 比http 多了一层安全套阶层（SSL）； https 比http更安全
+            ftp 文件传输 服务器上传文件的协议
+
+            // 域名
+            www.souyidai.com // com 是顶级域名  souyidai是二级域名
+
+            // 端口  0~65535
+            每一个服务对一个端口
+            http  默认端口 是 80
+            HTTPs 默认端口 是 443 
+            ftp  默认端口 是  21
+
+            // /p2p/ 路径 服务器 存放文件的路径
+
+
+            //  # 后边 我们称为 hash(哈希)   改变之后不会触发页面的刷新  路由
+            window.onhashchange = function(){
+                // 监听hash值的改变； 只要hash发生变化 就会触发该函数
+            }
+
+            // # 前的： ?后边我们称为 search
+
+            // hash  和  search 都不是必须的
+
+        */  
+
+        let oDivs = document.getElementsByTagName('div');
+        let o = [...oDivs];// o 不存在DOM映射
+        window.onhashchange = function(e){
+            let hash = location.hash;// #css #html #js
+            switch (hash) {
+                case '#css':
+                    [...oDivs].forEach((item,index)=>{
+                        if(index==0){
+                            item.style.display = 'block'
+                        }else{
+                            item.style.display = 'none'
+                        }
+                    })
+                    break;
+                case '#html':
+                    [...oDivs].forEach((item,index)=>{
+                        if(index==1){
+                            item.style.display = 'block'
+                        }else{
+                            item.style.display = 'none'
+                        }
+                    })
+                    break;
+                default:
+                    [...oDivs].forEach((item,index)=>{
+                        if(index==2){
+                            item.style.display = 'block'
+                        }else{
+                            item.style.display = 'none'
+                        }
+                    })
+                    break;
+            }
+        }
+        
+        var n = 2;
+        switch (n) {
+            case 1:
+            case 2:
+                // 1 或 2 都可以执行这部分代码 
+                break;
+            default:
+                break;
+        }
+    </script>
+</body>
+</html>
