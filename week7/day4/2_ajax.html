@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // tempImg.src = '////'
+        // tempImg.onload = function(){
+        //     img.src = '////'
+        // }
+        let xhr = new XMLHttpRequest();
+        xhr.open('get','../day3/data.json?id=123&name=234',true);
+        xhr.onreadystatechange = function(){
+            //readystate
+            if(xhr.readyState == 4 && /2\d{2}|304/.test(xhr.status)){
+                // 请求成功
+                console.log(xhr.getResponseHeader("Date"))// 参数是要获取的响应头的某个属性名
+            } 
+            // console.log(xhr.getResponseHeader("Date"))
+            console.log(xhr.getAllResponseHeaders());//获取所有的响应头
+        }  
+        // 设置请求头
+        // 转义汉语
+        // let str = escape("珠峰"); // unescape
+        // let str = encodeURI('珠峰');// decodeURI()  对于一些特殊字符不转义 /
+        let str = encodeURIComponent('珠峰');// decodeURIComponent() ***
+        xhr.setRequestHeader('name',str);
+        xhr.send();  
+
+        // 给后台发送数据
+        //get 传参 是通过 url 传递的；也称为query 传参；
+        //post 传参 通过  send 的参数传递过去
+        
+    </script>
+</body>
+</html>

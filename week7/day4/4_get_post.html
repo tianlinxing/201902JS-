@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // get 传参方式 ：问号传参（query传参）  
+        /*
+            由于get传参是把参数放到了 url上；
+            每个浏览器对于url的大小都是有限制的；所以get传参也是有大小限制的
+
+            get请求是有缓存的，会导致不是最新数据；
+                避免缓存，只要在url后被拼接一个每次都不同的search即可、
+                原因在于 浏览器对于同一个地址会有缓存，对于不同的search ,
+                浏览器认为是不同的地址；t=随机数 ； _=随机数
+
+            get 请求不安全，原因是参数在url上；值url被拦截 参数就可能被泄露 ；  
+        */
+
+        // post 参数是位于  请求体中的；大小是没有限制的； 没有缓存 ； 相对来说比较安全
+
+        // get 系列  get  head delete
+        //  head 只是请求响应头， 不会请求响应体；
+        //  delete 删除数据
+        //post 系列  post  put option
+        //   put 添加数据
+        //  option 大部分情况 不是程序员自己主动发出的，而是浏览器默认发出的
+        //         浏览器用来询问服务器 是否可以发送 该 post请求 
+    </script>
+</body>
+
+</html>

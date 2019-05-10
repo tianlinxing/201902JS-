@@ -15,20 +15,20 @@
         // ajax
 
         // ajax的四步
-        let baseUrl = 'https://www.easy-mock.com/mock/5cd2a79858a77829095bd1a9'
+        let baseUrl = 'https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test'
         // 创建ajax实例
         let xhr = new XMLHttpRequest();
 
 
         // 执行open 确定要访问的链接 以及同步异步
-        xhr.open('get', baseUrl+'/api/api/customer-flow', true);
+        xhr.open('post', baseUrl+'/zf', true);
 
         // 监听请求状态
         xhr.onreadystatechange = function () {
             //    if(xhr.readyState==4&&/2\d{2}/.test(xhr.status)){
             //        console.log(xhr)
             //    }
-            console.log(xhr.readyState);
+            console.log(xhr);
         }
 
         //发送请求

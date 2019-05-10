@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.open('post','https://www.easy-mock.com/mock/5cd4ed6c14deff742584d274/nba/test2?name=123',true);
+        xhr.onreadystatechange = function(){
+            //readystate
+            if(xhr.readyState == 4 && /2\d{2}|304/.test(xhr.status)){
+                // console.log(xhr.getResponseHeader("Date"))// 参数是要获取的响应头的某个属性名
+            } 
+            // console.log(xhr.getAllResponseHeaders());//获取所有的响应头
+        }  
+        let str = encodeURIComponent('珠峰');// decodeURIComponent() ***
+        xhr.setRequestHeader('name',str);
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8')
+        // mime 类型
+        // 把发给后台的数据 转成 formData 格式；需要设置一个这种请求头
+        // xhr.send('id=123&name=234'); // send 中的参数 是post发给后台的数据  
+        // xhr.send(JSON.stringify({"name":123,"id":234}))   
+        let obj = {"name":123,"id":234};
+        let str2 = '';
+        for(let k in obj){
+            str2 += `${k}=${obj[k]}&`
+        }
+        // 怎么删除最后的 &?
+        // str2 = str2.substring(0,str2.length - 1);
+        str2 = str2.replace(/&$/,'');
+        xhr.send(str2);
+    </script>
+</body>
+</html>
