@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let p = new Promise(function(res,rej){
+        //     setTimeout(()=>{
+        //         rej({name:123})
+        //     },3000)
+        // });
+        // p.then((data)=>{
+        //     console.log(data)
+        // },(d)=>{
+        //     console.log('then - 2 :',d)
+        //     console.log(q)
+        // }).then((data)=>{
+        //     // console.log(data3)
+        // },()=>{}).catch((err)=>{
+        //     // 失败会调用的函数
+        //     // 捕获上边任何地方出现的 未被捕获的异常
+        //     console.log(err)
+        // })
+
+        // Promise.all();
+
+        class Fn {
+            constructor(a) {
+                this.a = a;
+                // 私有属性
+            }
+            static f() {
+                // 静态属性；是在 把该类当作对象存起来的；
+                // 是在Fn自己身上存着的
+                console.log('Fn的f')
+            }
+            f2() {
+                // 该类原型上的方法 属于共有属性
+            }
+        }
+        class FN2 extends Fn {
+            // FN2 继承 Fn
+            // 把Fn实例的私有属性变成FN2实例的私有属性
+            // 把Fn实例的共有属性变成FN2实例的共有属性
+            // 把Fn的静态方法变成FN2的静态方法
+            constructor(b) {
+                // 写了 constructor 必写 super;
+                super(10); // super 就是 Fn的 constructor 
+                // 相当于 在这写了一个 this.a = 10;
+                this.b = b;
+            }
+            f2() {
+
+            }
+        }
+        let fn = new Fn(2);
+
+
+        // 基于 class  封装一个 Tab 类；
+        // new Tab('#box');
+
+        function myBind2() {
+            var con = arguments[0];
+            var ary = [];
+            for (var i = 1; i < arguments.length; i++) {
+                ary.push(arguments[i])
+            }
+            // this ---> fn
+            var that = this;
+            return function () {
+                var arr = [];
+                for (var i = 0; i < arguments.length; i++) {
+                    arr.push(arguments[i]);
+                }
+                that.apply(con, ary.concat(arr));
+            }
+        }
+    </script>
+</body>
+
+</html>

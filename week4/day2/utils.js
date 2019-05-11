@@ -1,4 +1,5 @@
 window._utils = (() => {
+  var isIe8 = window.getComputedStyle ? false : true;
   /**
    * 作用：将类数组转化为数组
    * @param likeAry(类数组)

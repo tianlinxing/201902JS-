@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <input type="text" id='inp'>
+    <ul id='list'>
+
+    </ul>
+    <script>
+        // 创建实例   open   监听状态  发送请求
+        // get 系列 ：get  head  delete
+        // post系列 ：post  put option(询问 跨域的复杂post请求) form data
+        //       send('q=12&b=12')
+        //       改成form data；添加一个请求头 content-type: ...www-form...
+        //       send(json字符串)
+        // 跨域： 浏览器的安全机制，协议 域名 端口 只要有一个不同 就是跨域；
+        //  jsonp  cors
+        //https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=wise_web&sugsid=26524,1432,21091,18559,20697,28518,28775,28722,28964,28836,28585,26350,22160&wd=nihao&req=2&bs=%E6%B8%A9%E7%83%AD%E6%88%91%E7%83%AD&pbs=%E6%B8%A9%E7%83%AD%E6%88%91%E7%83%AD&csor=5&pwd=niha&cb=fn
+
+        $('#inp').on('input', function () {
+            // 监听input 事件
+            // this.value input的内容
+            $.ajax({
+                url: 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=wise_web&sugsid=26524,1432,21091,18559,20697,28518,28775,28722,28964,28836,28585,26350,22160&req=2&csor=5',
+                dataType: 'jsonp',
+                jsonp: 'cb',
+                data: {
+                    wd: this.value,
+                    pwd: this.value
+                },
+                jsonpCallback: 'myself',
+                success: function (data) {
+                    // data 可能是空  data中g 有可能不存在
+                    data.g = data.g || [];
+                    console.log(data);
+                    let str = '';
+                    data.g.forEach(item=>{
+                        str += `<li>${item.q}</li>`
+                    })
+                    $('#list').html(str);
+                }
+            });
+
+        })
+
+        $.ajax({
+            url: 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=wise_web&sugsid=26524,1432,21091,18559,20697,28518,28775,28722,28964,28836,28585,26350,22160&req=2&csor=5',
+            dataType: 'jsonp',
+            jsonp: 'cb',
+            data: {
+                wd: 'hello',
+                pwd: 'hello'
+            },
+            jsonpCallback: 'myself',
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    </script>
+</body>
+
+</html>

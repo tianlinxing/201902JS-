@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            url 必须
+            type
+            data
+            async
+            cache
+            success
+            error
+            ajax({})
+
+        */
+        function ajax(options) {
+            let {
+                url,
+                type = 'get',
+                data = {},
+                async = true,
+                cache = false,
+                success,
+                error
+            } = options;
+
+            // 处理data
+            let str = '';
+            for(let k in data){
+                str += `${k}=${data[k]}&`  // data.k === data['k']
+            }
+            str = str.replace(/&$/,'');
+
+            if(type.toLowerCase() == 'get'){
+                // url += str;
+                if(url.indexOf('?')==-1){
+                    url += '?'+str
+                }else{
+                    url += '&' + str
+                }
+                if(!cache){
+                    url += '&_='+Math.random();
+                }
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open(type, url, async);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && /2\d{2}|304/.test(xhr.status)) {
+                    let str = xhr.response;
+                    //    let obj = JSON.parse(str);
+                    let obj = null;
+                    try {
+                        obj = JSON.parse(str);
+                    } catch (e) {
+                        obj = xhr;
+                    }
+                    success && success(obj)
+                } else if (/[45]\d{2}/.test(xhr.status)) {
+                    error && error(xhr)
+                }
+            }
+            // if(type.toLowerCase() == 'get'){
+            //     xhr.send()
+            // }else{
+            //     xhr.send(str)
+            // }
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8')
+            xhr.send(str)
+        }
+        ajax({url:'../data.json'})
+    </script>
+</body>
+
+</html>
