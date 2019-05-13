@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // fetch 是es8新增的 原生API
+        fetch('https://www.easy-mock.com/mock/5bcfddd37ed09630d2c8dae7/jd/kuaibao',{
+            method:'post'
+        }).then((data)=>{
+            // console.log(data.json())
+            // debugger
+            // 想获取后台数据  需要两个then; 第一个then 的回调函数的返回值 是 data.json();
+            return data.json()
+        }).then(data=>{
+            console.log(data);
+        }).catch(err=>{
+            console.log(err);
+        })   
+    </script>
+</body>
+</html>

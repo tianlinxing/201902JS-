@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ajax({url:,type,data,async,cache}).then(()=>{},()=>{})  
+        // 封装ajax 四步得有；能调用.then 则返回值必是一个Promise实例 
+        function ajax(options) {
+            let {
+                url,
+                type = 'get',
+                data = {},
+                async = true,
+                cache = false
+            } = options;
+            // 对于 data 的 处理；
+            let str = '';
+            for (let k in data) {
+                str += `${k}=${data[k]}&`
+            }
+            str = str.substring(0, str.length - 1); // 删除最后边的&;
+            if (type.toLowerCase() == 'get') {
+                // str 拼接到 url 后边；
+                // https://www.baidu.com?a=12&b=13c=4
+                // url += str;
+                if (url.includes('?')) {
+                    url += '&' + str
+                } else {
+                    url += '?' + str;
+                }
+                if (!cache) {
+                    // 不走缓存
+                    url += '&_=' + Math.random();
+                }
+            }
+            let p = new Promise(function (res, rej) {
+                let xhr = new XMLHttpRequest();
+                xhr.open(type, url, async);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) { // 4代表请求完成；成功或者失败 需要看 status
+                        if (/2\d{2}|304/.test(xhr.status)) {
+                            let str = xhr.response; // 后台给的JSON字符串
+                            // let obj = JSON.parse(str);
+                            let obj = null;
+                            try {
+                                obj = JSON.parse(str)
+                            } catch (error) {
+                                obj = xhr;
+                            }
+                            // success &&success(obj)
+                            res(obj);
+                        } else if (/[45]\d{2}/.test(xhr.status)) {
+                            // error && error(xhr);
+                            rej(xhr);
+                        }
+                    }
+                };
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
+                // 这个请求头的设置只是针对 post请求来说的，对于get来说没有作用；
+                xhr.send(str); // post请求需要把参数放到send中；
+            });
+            return p;
+        }
+
+        ajax({
+            url: 'https://www.renrendai.com/p2p/bond/isShowBondOffDialog',
+            data:{a:12,b:13},
+            type:'post'
+        }).then((data)=>{
+            console.log('success:',data)
+        }).catch((err)=>{
+            console.log('fail:',err)
+        })
+    </script>
+</body>
+
+</html>
