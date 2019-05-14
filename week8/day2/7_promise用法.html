@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        let p1 = new Promise(function (res, rej) {
+            $.ajax({
+                url: 'https://d.jd.com/lab/get',
+                dataType: 'jsonp',
+                success: function (data) {
+                    // console.log(data);
+                    res(data)
+                },
+                error:function(err){
+                    rej(err)
+                }
+            })
+        });
+        p1.then((data)=>{
+            console.log(data);
+        },()=>{
+            return 123
+        }).then((data)=>{
+            console.log(data)
+        }).catch((err)=>{
+            // 捕获上边 未被捕获的错误
+            console.log(err);
+        })
+        // Promise.all([一个个的Promise实例]).then((data)=>{
+        //    所有的实例都成功之后触发该函数 ;data 也是一个数组，数组中的每一项对应参数中的数组中的实例   
+        // }).catch(()=>{只要有一个失败 就会走该函数})
+        // Promise.race([一个个的Promise实例]).then(()=>{
+            //第一个完成的 并且是成功的状态 才会执行该函数
+        // }).catch(()=>{第一个完成的请求失败的状态 就会走该函数})
+
+
+        // 基于Promise 封装ajax;
+
+        // 四步  返回值必须是一个 Promise实例
+        function PromiseAjax(options) {
+            let {
+                url,
+                method='get',
+                data={},
+                async = true,
+                cache = false
+            } = options;
+            let str = '';
+            for(let k in data){
+                str += `${k}=${data[k]}&`
+            }
+            str = str.replace(/&$/,'');
+            if(method.toLowerCase() == 'get'){
+                if(url.includes('?')){
+                    url+= "&"+str
+                }else{
+                    url += '?'+str;
+                }
+                if(!cache){
+                    url+='&_='+Math.random();
+                }
+            }
+            return new Promise(function(res,rej){
+                let xhr = new XMLHttpRequest();
+                xhr.open(method,url,async);
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState == 4){
+                        if(/2\d{2}|304/.test(xhr.status)){
+                            let str = xhr.response;
+                            let obj = null;
+                            try {
+                                obj = JSON.parse(str);
+                            } catch (error) {
+                                obj = xhr;
+                            }
+                            res(obj);
+                        }else if(/[45]\d{2}/.test(xhr.status)){
+                            rej(xhr);
+                        }
+                    }
+                };
+                xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+                xhr.send(str);
+            })
+        }    
+
+        function F() {
+            this.a = 123
+        }
+        class FN{
+            constructor(){
+                // 私有属性 this.xxx=xxx
+            }
+            f(){
+                //共有属性
+            }
+            static f(){
+                // 静态属性
+            }
+        }
+        class FN2 extends FN{
+            constructor(){
+                super();
+            }
+        }
+
+
+        // axios  :get(url,{params:{}}); post(url,{})
+        // 请求拦截 所有axios请求发送之前会被拦截一次
+        // 相应拦截 所有axios响应时，在then接收之前可以被统一拦截一次
+        // axios.defaults.baseURL='https://www.baidu.com/abc/qwer'  // 设置默认请求路径
+        //               axios.get('/q')
+        // axios 的post请求 发个后台的数据格式 默认是 JSON字符串；
+
+        // fetch  get传参放到url后边； post传参 body属性
+        fetch('url',{
+            method:'post',
+            body:'a=12&b=13'
+        }).then((data)=>{
+            return data.json()
+        }).then(data=>{
+            console.log(data)
+        })
+    </script>
+</body>
+
+</html>

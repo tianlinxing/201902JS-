@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box {
+            width: 600px;
+            margin: auto;
+        }
+
+        li {
+            display: flex;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #ccc;
+        }
+
+        li>div {
+            flex: 1;
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="box">
+        <li class="title">
+            <div>影片</div>
+            <div id='btn'>综合票房</div>
+            <div>票房占比</div>
+            <div>排片场次</div>
+            <div>上座率</div>
+        </li>
+    </ul>
+    <ul class="box" id='list'>
+
+    </ul>
+</body>
+
+</html>
+<script>
+    let str = 'https://www.easy-mock.com/mock/5cd4ed6c14deff742584d274/nba/promovie/api/box/second.json';
+    let aryList = [];
+    // let obj = {};
+    // let p = new Promise((res,rej)=>{
+    //     $.ajax({
+    //         url:str,
+    //         success:res,
+    //         error:rej
+    //     })
+    // })
+    // p.then(data=>{
+    axios.get(str).then(data=>{
+        console.log(data.data.data.list);
+        return data.data.data.list
+    }).then((ary)=>{
+        aryList = ary;
+        // obj.q = ary;
+        bindHtml(ary);
+    })
+
+    // console.log(aryList);
+    // console.log(obj);
+    let n = -1;
+    btn.onclick = function(){
+        //排序数组 然后重新渲染
+        n*=-1;
+        aryList.sort((a,b)=>{
+            return (a.boxInfo - b.boxInfo)*(n)
+        });
+        bindHtml(aryList);
+    }
+
+    function bindHtml(ary) {
+        let str = '';
+        ary.forEach(item => {
+            str += `<li>
+                    <div>${item.movieName}</div>
+                    <div>${item.boxInfo}</div>
+                    <div>${item.showRate}</div>
+                    <div>${item.showInfo}</div>
+                    <div>${item.avgSeatView}</div>
+                </li>`
+        });
+        list.innerHTML = str;
+    }
+    
+</script>
