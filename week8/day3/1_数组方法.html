@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // pop   push 
+        //shift  unshift
+        //sort(function(){})  reverse  // 返回值是改变后的原数组
+        // splice
+        let ary1 = [3,2,5,23,5];
+        let ary2 = ary1.reverse();
+        ary2 === ary1;
+        // 我们把数组中的能够改变原有数组的**原生方法**称为 数组的变异方法
+        // indexof slice concat  join
+
+        //数组中的迭代方法（循环）
+        // for  for in 
+        // forEach  map  filter  some  every  reduce
+        let ary3 = [{name:1},{name:1},{name:1},{name:1}];
+        let ary4 = [1,2,3,4,5];
+        ary3.forEach(item=>item.name+=1);
+        ary3.forEach(function(item){
+            // item 代表了 数组中每一个对象的地址
+            // debugger;
+            return item.name+=1;
+        })
+        ary4.forEach(item=>item+=1);
+        console.log(ary3,ary4);
+
+        let ary5 = ary4.map(item=>{
+            // map返回值是一个 新数组；数组中的项是由回调函数的返回值组成
+            return item*2
+        })
+
+        let ary6 = [1,2,3,4,5].filter((item)=>{
+            // 返回一个新数组，数组中的项是由 回调函数的返回值是true还是false来决定
+            // debugger;
+            // return item > 2;
+            return 0;
+        })
+        console.log(ary6);
+
+        // some every
+        let ary7 = [1,2,3,4,5,6];
+        ary7.some((item)=>{
+            console.log(item);
+            // 返回值是个布尔值； 迭代次数 ：找到符合条件的即停止迭代
+            // 只有要有一个回调函数的返回值是true 结果就是true;
+            return item < 2;
+        });
+
+        ary7.every((item)=>{
+            // 返回值也是一个布尔值；迭代次数 ：找到符合条件(结果是false)的即停止迭代
+            // 只要有一个回调函数的返回值是false  结果就是false;
+            console.log(item)
+        });
+
+        let ary8 = [11,24,13,54,75];// eval(ary8.join('+'))
+
+        let total = ary8.reduce((prev,next)=>{
+            // prev 是上一个回调的return值；第一个回调函数的 prev 是数组中的第一项
+            // next 是当前迭代的项
+            // reduce的第二个参数 存在时，第一个回调的 prev就是reduce的第二个参数
+            //                   不存在时，第一个回调的 prev 是数组中的第一项;
+            console.log(prev,next);
+            return prev+nextx`  
+        },10000)
+
+        let ary9 = [{a:1},{a:2},{a:3},{a:4}];
+        // 使用 reduce  算出数组中 所有想的 a属性的和；
+
+        let t = ary9.reduce((prev,next)=>{
+            debugger;
+            return prev + next.a;
+        },0)
+        // t=10
+
+
+    </script>
+</body>
+</html>
