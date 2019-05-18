@@ -8,11 +8,12 @@
 </head>
 <body>
     <div id="app">
-        <h1 v-show='true'>{{name}}</h1>
+        <h1>{{name}}</h1>
     </div>
 </body>
 </html>
 <script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.min.js"></script>
 <script>
     let vm = new Vue({
         el:'#app',

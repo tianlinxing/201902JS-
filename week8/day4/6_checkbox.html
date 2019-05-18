@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!--  
+            对于多选框， 我们绑定同一个变量，值是一个数组，
+            每一个 checkbox 都要有一个value值；
+        -->
+        <input type="checkbox" @change='fn' v-model='all'>
+        -----------------------------------------
+        <input type="checkbox" v-model='checked' value="1">
+        <input type="checkbox" v-model='checked' value="2">
+        <input type="checkbox" v-model='checked' value="3">
+        <input type="checkbox" v-model='checked' value="4">
+        {{checked}}
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            all:false,
+            checked:['1','4']
+        },
+        methods: {
+            fn(){
+                console.log(this.all);
+                if(this.all){
+                    this.checked = ['1','2','3','4'];
+                }else{
+                    this.checked = [];
+                }
+            }
+        },
+    })
+</script>

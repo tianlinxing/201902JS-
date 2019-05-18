@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h2 v-for='(item,index) in ary' :key='index' v-show='index%2'>
+            <!-- 
+
+                v-for 把整个结构循环出来 
+                v-for = '自定义变量名  in  vue变量 '
+                自定义变量名  是  vue变量中的每一项
+                v-for 可以循环  数组 对象  字符串 数字
+
+                item 代表数组中的每一项
+                index 是每一项对应的索引
+
+                item和 index 这两个变量 只能在 循环的标签内部使用
+
+                使用 v-for 时 ； 每个被循环的元素 都需要加上key属性，
+                属性值是该条数据唯一的一个标识；一般都是数据的ID，没有ID时 
+                一般用 index(循环的索引)；是为了符合 就地复用的原则
+
+            -->
+            {{item.name1}}---------------{{index}}
+        </h2>
+
+        <h2 v-for='(value,key) in obj'>
+            <!-- value 代表属性值； key 代表属性名 -->
+            {{key}}--------------------{{value}}
+        </h2>
+
+        <h3 v-for='(item,index) in "qwer"'>
+            <!-- item  字符串中的每一项；index代表 索引 -->
+            {{item}} ---------- {{index}}
+        </h3>
+
+        <h3 v-for='(n,i) in 10'>
+            {{n}}---{{i}}
+        </h3>
+
+        <ul>
+            <li v-for='n in 5' v-if='n%2'>
+                <!-- v-for 的优先级最高； 先是循环展示 再去查看v-if是否成立 -->
+                珠峰{{n}}
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // v-model v-text v-html  v-cloak v-once v-on(@) v-if v-show
+    // v-for
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            ary:[{name1:'hello'},{name1:'world'}],
+            obj:{
+                a:1,
+                b:2,
+                c:3
+            }
+        }
+    });
+</script>
