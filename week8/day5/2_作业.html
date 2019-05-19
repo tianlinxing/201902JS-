@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <div>
+            <input type="checkbox" v-model='checked' value='css'>css
+            <input type="checkbox" v-model='checked' value='js'>js
+            <input type="checkbox" v-model='checked' value='vue'>vue
+            <input type="checkbox" v-model='checked' value='node'>node
+            <input type="checkbox" v-model='checked' value='react'>react
+        </div>
+        <div>
+            <input type="radio" v-model='sex' value='man'>男
+            <input type="radio" v-model='sex' value='women'>女
+        </div>
+        <div>
+            <input type="text" placeholder="姓名" v-model='name'>
+        </div>
+        <div>
+            <select v-model='select'>
+                <option :value="item" v-for='(item,index) in ary' :key='index'>
+                    {{item}}
+                </option>
+            </select>
+        </div>
+        <button @click='submit'> 提交 </button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+    // v-bind 专门用来 绑定行内属性的 简写时一个 : 
+    // 例如  :key='index' :value='变量'  :src='变量' 
+    // axios.defaults.headers['content-type']=''
+    // axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            checked:[],
+            ary:[],
+            sex:'man',
+            select:'js', //默认选中JS
+        },
+        created() {
+            // 该函数会在页面 一加载就会执行
+            // this 指向当前实例
+            this.getData();
+        },
+        methods: {
+            getData(){
+                axios.get('./data.json').then((data)=>{
+                    // 
+                    console.log(data);
+                    this.ary = data.data;//把从后台获取的数组赋给ary
+                })
+            },
+            submit(){
+                let obj = {
+                    class:this.checked,
+                    name:this.name,
+                    sex:this.sex,
+                    select:this.select
+                };
+                // a=12&b=13
+                axios.post('https://www.easy-mock.com/mock/5cd4ed6c14deff742584d274/nba/loan/list/loanList',obj).then((data)=>{
+                    console.log(data);
+                })
+            }
+        },
+    });
+</script>

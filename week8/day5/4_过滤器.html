@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        这本书的价格是￥{{(money/100).toFixed(2)}}
+        这本书2的价格是￥{{(money/100).toFixed(2)}}
+        这本书3的价格是￥{{(money/100).toFixed(2)}}</br>
+        这本书3的价格是￥{{money | myMoney(3)}} 123.000</br>
+        这本书3的价格是￥{{money | myMoney}} 123.00</br>
+        这本书3的价格是￥{{money | myMoney(1)}} 123.0</br>
+        <i>名字：{{123|myName|myName|zf}}</i>
+        <!-- 123|myName  ==> 珠峰123 -->
+        <!-- 珠峰123|myName ==> 珠峰珠峰123 -->
+        <!--  
+            我们 把 | 称为管道符； 管道符后边跟的是 一个过滤器； 
+            当前位置展示的 是 过滤器 返回值； 过滤器的回调函数第一项实参就是
+            管道符前边的值；
+        -->
+    </div>
+
+    <div id="app2">
+        <h2>
+            {{123|myName}}
+        </h2>
+        <h2>
+            {{123|zf}}
+        </h2>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 全局过滤器  私有过滤器
+    // Vue.filter('过滤器名字'，回调函数)回调函数的第一个实参 是 管道符前边的那个值；
+    // 最终展示出来的是 过滤器的 返回值；
+    // 过滤器使用时 可以传参数； 但是传进来的参数 位于 val(管道符前边的值) 的后边
+
+    Vue.filter('myName',function(val,n,m){
+        console.log(arguments);
+        // return 'hello'
+        return '珠峰'+val
+    });
+    Vue.filter('myMoney',function(val,n=2){
+        // n = n || 2
+        console.log(arguments)
+        return (val/100).toFixed(n);
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            money:12300
+        },
+        filters:{
+            // vm 实例的私有过滤器
+            zf(val){
+                return 'zf'+val
+            }
+        }
+    });
+
+    let vm2 = new Vue({
+        el:'#app2',
+    })
+</script>
