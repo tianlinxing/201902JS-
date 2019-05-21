@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 
+            根据 input 的内容长度 来体现； 用户输入是否合法 
+            姓名的长度不能小于2  也不能大于5；
+            小于了 就提示  长度不能小于2；
+            合法 就是提示  姓名可用
+            大于了  就提示 长度不能大于5；
+        -->
+        <input type="text" v-model='name'>
+        <h1>{{name}}</h1>
+        <i>{{tip}}</i>
+        <!-- tip  提示语  依赖于 name的长度 -->
+    </div>
+</body>
+
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰"
+        },
+        methods: {
+            fn() {
+
+            }
+        },
+        computed: {
+            tip() {
+                //  计算属性 不支持异步
+                //  tip 跟 this.name 的依赖关系
+                //   vue捕捉不到；
+                console.log(111)
+                setTimeout(() => {
+                    if (this.name.length == 0) {
+                        return '';
+                    }
+                    if (this.name.length < 2) {
+                        return '长度不能小于2'
+                    } else if (this.name.length > 5) {
+                        return '长度不能大于5'
+                    } else {
+                        return '姓名可用'
+                    }
+                }, 200);
+
+            },
+            fn2: {
+                get() {},
+                set() {}
+            }
+        },
+    });
+</script>

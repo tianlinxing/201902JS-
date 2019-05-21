@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h2 v-for='(item,index) in [12,3,212,55]' :key='index'>
+
+        </h2>
+        {{123|mymoney(2,3,4,5,6)|mymoney}}
+        <input type="text" v-model='name'>
+        <h3>{{name2}}</h3>
+        <h4>{{nameMethods()}}</h4>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.filter('mymoney',function(val,n){
+        // val 是管道符前边的值
+        return 1000
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        filters:{
+
+        },
+        methods: {
+            nameMethods(){
+                return this.name.split('').reverse().join('')
+            }
+        },
+        computed: {
+            // 业务上 存在依赖关系的  我们要优先使用 计算属性；
+            name2(){
+                return  this.name.split('').reverse().join('')
+            },
+            name3:{
+                get(){
+                   // name3  的 值 是 该函数的返回值； 
+                },
+                set(val){
+                    // val 就是 给 name3 赋予的那个值
+                }
+            }
+        },
+    });
+</script>

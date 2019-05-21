@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        h1{
+            width: 100px;
+            height: 50px;
+            background: salmon;
+        }
+        .myfade-enter{
+            /* xx-enter   刚要显示的时候的样式 */
+            opacity: 0;
+            transform: translateX(300px)
+        }
+        .myfade-enter-active{
+            /* 贯穿始终 */
+            transition: all 1s;
+        }
+        .myfade-enter-to{
+            /* xx-enter-to  显示之后的样式 */
+            opacity: 1;
+            transform: translateX(0)
+        }
+        .myfade-leave{
+            opacity: 1;
+            transform: translateX(0)
+        }
+        .myfade-leave-active{
+            transition:all 1s;
+        }
+        .myfade-leave-to{
+            opacity: 0;
+            transform: translateX(300px)
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition name='myfade'>
+            <h1 v-show='flag'>{{name}}</h1>
+        </transition>
+        <button @click='flag = !flag'>按钮</button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:true
+        }
+    });
+</script>

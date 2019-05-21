@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <!-- <h2 v-if='name.length > 2'>1{{name}}</h2>
+        <h2 v-if='name.length > 2'>2{{name}}</h2>
+        <h2 v-if='name.length > 2'>3{{name}}</h2>
+        <h2 v-if='name.length > 2'>4{{name}}</h2>
+        <h2 v-if='name.length > 2'>5{{name}}</h2>
+        <h2 v-if='name.length > 2'>6{{name}}</h2> -->
+        <!-- <div v-if='name.length > 2'>
+            <h2>1{{name}}</h2>
+            <h2>2{{name}}</h2>
+            <h2>3{{name}}</h2>
+            <h2>4{{name}}</h2>
+            <h2>5{{name}}</h2>
+            <h2>6{{name}}</h2>
+        </div> -->
+        <template v-if='name.length > 2'>
+            <!-- 可以使用 template标签 整体包含一部分元素 -->
+            <h2>1{{name}}</h2>
+            <h2>2{{name}}</h2>
+            <h2>3{{name}}</h2>
+            <h2>4{{name}}</h2>
+            <h2>5{{name}}</h2>
+            <h2>6{{name}}</h2>
+        </template>
+        <!-- <span></span>   v-if 和 另外两个指令 之间不能有其他元素-->
+        <h3 v-else-if='name.length==2'>{{name}}</h3>
+        <h4 v-else>{{name}}</h4>
+
+
+
+        <template v-if='flag'>
+            请输入姓名：<input type="text" :key='12213'>
+        </template>
+        <template v-else>
+            请输入邮箱：<input type="text" :key='32123131'>
+        </template>
+        <!-- 若展示的是输入 姓名；则按钮展示的文本是 “我要输入邮箱” -->
+        <!-- 若展示的是输入 邮箱；则按钮展示的文本是 “我要输入姓名” -->
+        <button @click="flag = !flag">
+            我要输入{{flag ? '邮箱' : '姓名'}}
+        </button>
+        <button @click="fn">
+            我要输入{{text}}
+        </button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:true
+        },
+        computed: {
+            text(){
+                return this.flag ? '邮箱' : '姓名'
+            }
+        },
+        methods: {
+            fn(){
+                this.flag = !this.flag;
+            }
+        },
+    });
+</script>

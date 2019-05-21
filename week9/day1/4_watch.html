@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='name'>
+        <h1>{{name}}</h1>
+        <i>{{tip}}</i>
+        
+        <h2 v-show='false'>{{name2}}</h2>
+        <h2 v-if='false'>{{name2}}</h2>
+        <!-- 需要频繁切换的 我们最好使用 v-show; 
+            v-if 整个不加载
+            v-show 都加载  控制的是显示和隐藏；
+        -->
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            tip:'',
+            timer:null
+        },
+        watch: {
+            name(){
+                // 监听 data中的 name 属性；
+                // 只要name发生改变， 就会触发该函数
+                console.log(111);
+                clearTimeout(this.timer)
+                this.timer = setTimeout(() => {
+                    // debugger;
+                    if (this.name.length == 0) {
+                        this.tip = '';
+                    }
+                    if (this.name.length < 2) {
+                        this.tip = '长度不能小于2'
+                    } else if (this.name.length > 5) {
+                        this.tip = '长度不能大于5'
+                    } else {
+                        this.tip = '姓名可用'
+                    }
+                }, 2000);
+            }
+        },
+        computed: {
+            name2(){
+                // 变量 name2 依赖于 this.name;
+                // 只要name 发生改变， 就会触发该函数; 前提页面用过name2
+                console.log(222);
+                return this.name + '666'
+            }
+        },
+    });
+</script>

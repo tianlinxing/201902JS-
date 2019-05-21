@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        请输入您的问题：<input type="text" v-model='question'>
+        <h2>
+            答案是：{{msg}}
+        </h2>
+        <img :src="url" alt="">
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            question:'',
+            msg:'',
+            url:'',
+            timer:null
+        },
+        watch:{
+            question(){
+                // 防抖  onscroll
+                // 在输入的过程中， question 这个变量一致在改变；
+                // 那么该函数就会一直执行，执行时 先把定时器清除；
+                // 当我们停止输入 ； 300毫秒之后；会执行最后一个定时器
+                clearTimeout(this.timer);
+                this.msg = '等着您输入完成';
+                this.timer = setTimeout(() => {
+                    if(this.question.indexOf('?')==-1){
+                        // /？|\?/.test(this.question)
+                        this.msg = '您的问题不合法';
+                        return;// 问题不合法 直接返回 不再执行下边的代码
+                    }
+                    this.msg = '正在思考' ;
+                    // 停止输入300毫秒  之后才去执行的函数
+                    axios.get('https://yesno.wtf/api').then((data)=>{
+                        console.log(data);
+                        // 请求成功
+                        this.msg = data.data.answer;
+                        this.url = data.data.image;
+                    })
+                }, 300);
+            }
+        }
+    });
+</script>

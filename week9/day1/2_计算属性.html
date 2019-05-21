@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='age'>
+        <input type="text" v-model='name'>
+        <h1>{{name}}</h1>
+        <!-- 几种方式 可以实现 name的反转 -->
+        <h2>{{name.split('').reverse().join('')}}</h2>
+        <h3>{{name2}}</h3>
+        <h4>{{reverseName()}}</h4>
+        <h5>{{name|reverse}}</h5>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // data , computed , methods 这三个属性中的属性名是不能重复的
+    // 因为这三个中的属性 最终都是挂载到了 当前的实例身上了；
+    Vue.filter('reverse',function(val){
+        console.log('filter')
+        return val.split('').reverse().join('');
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            age:12
+        },
+        methods: {
+            reverseName(){
+                console.log('methods');
+                return this.name.split('').reverse().join('')
+            }
+        },
+        computed: {
+            name2(){
+                // 只有依赖发生改变  还函数才会执行；
+                console.log('computed')
+                return this.name.split('').reverse().join('')
+            }
+        },
+    });
+</script>
