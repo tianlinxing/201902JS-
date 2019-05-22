@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.7.0/animate.css">
+    <style>
+        div.fade{
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            background: salmon;
+        }
+        .myFade-enter{
+            /* 刚进来第一帧 时的样式 */
+            opacity: 0;
+            transform: translateX(200px) scale(0.2);
+        }
+        .myFade-enter-active{
+            /* 贯穿始终 */
+            transition:all 1s;
+        }
+        .myFade-enter-to{
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+        .myFade-leave-to{
+            /* 刚进来第一帧 时的样式 */
+            opacity: 0;
+            transform: translateX(200px) scale(0.2);
+        }
+        .myFade-leave-active{
+            /* 贯穿始终 */
+            transition:all 1s;
+        }
+        .myFade-leave{
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .mybounce-enter-active{
+            animation: mybounceMove 1s;
+        }
+        .mybounce-leave-active{
+            animation: mybounceMove2 1s;
+        }
+        @keyframes mybounceMove{
+            0%{
+                transform: scale(0.2)
+            }
+            50%{
+                transform: scale(1.2)
+            }
+            100%{
+                transform: scale(1)
+            }
+        }
+        @keyframes mybounceMove2{
+            0%{
+                transform: scale(1)
+            }
+            50%{
+                transform: scale(1.2)
+            }
+            100%{
+                transform: scale(0)
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <button @click='flag = !flag'>按钮</button>
+
+        <!-- 自定义 过渡效果 -->
+        <transition name='myFade'>
+            <div class='fade' v-show='flag'>{{name}}</div>
+        </transition>
+
+
+        <!-- 自定义帧动画 -->
+        <transition name='mybounce'>
+            <div class='fade' v-show='flag'>{{name}}</div>
+        </transition>
+
+
+        <!-- 第三方帧动画 -->
+        <transition 
+            enter-active-class="animated bounceInLeft" 
+            leave-active-class="animated bounceOutRight"
+        >
+            <div class='fade' v-show='flag'>{{name}}</div>
+        </transition>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:true
+        }
+    });
+</script>

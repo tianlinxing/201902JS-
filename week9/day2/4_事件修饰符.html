@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: auto
+        }
+        .outer{
+            width: 400px;
+            height: 400px;
+            background: salmon
+        }
+        .center{
+            width: 200px;
+            height: 200px;
+            background: aquamarine
+        }
+        .inner{
+            width: 100px;
+            height: 100px;
+            background: skyblue
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <div class='outer' @click='fn3'>
+            <div class='center' @click.self='fn2'>
+                <div class='inner' @click='fn1'></div>
+            </div>
+        </div>
+
+        <a href="https://www.baidu.com" @click.prevent='fn1'>百度一下</a>
+
+        <input type="text" v-model.number='name'>
+        {{typeof name}}{{name}}
+        <!-- v-model的修饰符 -->
+        <!-- .trim  去除字符串的首尾空格 -->
+        <!-- .number  转数字;功能跟parseFloat类似; 转成就是数字 ; 不成功 就是字符串 -->
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        methods: {
+            fn1(){
+                console.log(1)
+            },
+            fn2(){
+                console.log(2)
+            },
+            fn3(){
+                console.log(3)
+            },
+        },
+    });
+    /*
+        .stop  阻止冒泡
+        .prevent  阻止默认事件
+        .once  对应的函数只能执行一次;
+        .self  只有点击自己的时候才会触发
+        .captrue  相当于 odiv.addEventListener('click',function(){},true)  在捕获阶段触发函数
+        .passive 先执行默认 在执行函数
+    */
+</script>

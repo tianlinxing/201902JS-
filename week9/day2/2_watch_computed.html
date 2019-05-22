@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <h2 v-show='false'>{{name2}}</h2>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        computed: {
+            name2(){
+                console.log(111)
+                setTimeout(() => {
+                    console.log(this.name)
+                }, 10);
+                // return  值 就是  name2的值；
+            }
+        },
+        watch: {
+            name(){
+                // 只要name发生改变  就会触发该函数
+                // return 的值 对name没有影响
+            }
+        },
+    });
+    /*
+        jsonp;解决跨域
+        是利用 script 标签的src属性 没有跨域这一说；通过该属性 引入远程 的一个
+        js文件； 这个js文件是由后台生成的；我们引入到前端之后，会当作JS执行，
+        内容 就是一个 函数的执行；传递的实参 就是 我们前端要用到的数据；
+        函数体 是在引入之前我们前端自己定义好的；
+    
+    */
+</script>
