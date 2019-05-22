@@ -38,7 +38,7 @@ let vm = new Vue({
             switch (this.myhash) {
                 case '#/all':
                     return this.ary.map(item=>{
-                        // item.isSelect;// 就是为了用一下isSelect 让他有依赖关系
+                        item.isSelect;// 就是为了用一下isSelect 让他有依赖关系
                         return item
                     })
                     break;
