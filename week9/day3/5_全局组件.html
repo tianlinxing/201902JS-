@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <zf-name></zf-name>
+        <zf-name></zf-name>
+
+        <counter></counter>
+        <counter></counter>
+        <counter></counter>
+        <!-- <hello></hello> -->
+    </div>
+    <counter></counter>
+    <template id='myname'>
+        <div>
+            <h1>{{name}}</h1>
+            <counter></counter>
+            <input type="text" v-model='name'>
+        </div>
+    </template>
+    <template id='counter'>
+        <div>
+            <!-- <zf-name></zf-name> -->
+            <button @click='fn'>点击了{{n}}次</button>
+        </div>
+    </template>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let obj = {
+        n:0
+    }
+    Vue.component('zf-name',{
+        // template:`<div>
+        //     <h1>我的姓名是{{name}}</h1>
+        //     <input type='text' v-model='name' />
+        // </div>`,
+        template:'#myname',
+        data(){
+            // 为了保证数据的独立性
+            return {
+                name:'珠峰'
+            }
+        },
+        methods: {
+            
+        },
+    })
+    Vue.component('counter',{
+        template:'#counter',
+        data(){
+            return {
+                n:0
+            }
+            // return obj
+        },
+        methods: {
+            fn(){
+                // this指向当前实例；
+                // vue的组件都是一个实例
+                this.n++;
+            }
+        },
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        }
+    });
+</script>
+
+<!-- 
+    Vue.component('组件名'，{
+        template:'#myname', // 去找id是myname的template标签当作渲染模板； template 放到#app外边
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+
+        }
+    })
+
+    使用组件：
+        把组件名当作标签名使用；使用的地方： vue能够渲染到的地方；
+        vue 会把所有的不是 原生html标签的 标签当作组件渲染；
+        若没有对应的组件  就会报错；有的话 就正常渲染；
+        组件名对应的位置 展示的内容  就是 组件自己的template对应的模板；
+
+
+-->

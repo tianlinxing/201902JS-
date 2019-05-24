@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <my-hello></my-hello>
+        <my-com></my-com>
+    </div>
+
+    <template id='com1'>
+        <div>
+            <h2>这是一个全局组件</h2>
+            <!-- <my-hello></my-hello> -->
+            <my-hello123></my-hello123>
+        </div>
+    </template>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let countComponent = {
+        template:`<button @click='fn'>点击了{{n}}次</button>`,
+        data(){
+            return{
+                n:0
+            }
+        },
+        methods: {
+            fn(){
+                this.n++;
+            }
+        },
+    }
+
+    let sonComponent = {
+        template:'<h1><my-count></my-count>hello<my-count></my-count>珠峰<my-count></my-count></h1>',
+        data(){
+            return{
+
+            }
+        },
+        components:{
+            'my-count':countComponent
+        }
+    };
+    Vue.component('my-com',{
+        template:'#com1',
+        components:{
+            'my-hello123':sonComponent
+        }
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            'my-hello':sonComponent
+        }
+    });
+    /*
+        局部组件的使用过程：
+            1、先声明定义一个对象，对象的属性 跟 new Vue传的参数一致，
+                但是data是一个函数； data只有在根组件中是一个对象，其他的都是函数
+            2、要在那个组件使用，就在哪个组件的components属性中注册；
+            3、在要使用的组件的模板中 书写对应的组件名即可
+
+            局部组件是 在哪个组件注册； 就只能在那个组件中使用，别的组件，不管什么关系都不能使用；
+            全局组件是 注册之后，所有组件都能使用；
+    */
+</script>
