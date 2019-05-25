@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 
+            父传子  父组件怎么把数据传给子组件
+            我们通过 行内属性传递，子组件通过props接收
+            行内属性名 是自己定义的；
+        -->
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <input type="text" v-model='age'>
+        <my-name :myname='name' :age123='age'></my-name>
+        <age :myage='age'></age>
+    </div>
+</body>
+
+</html>
+<template id='name'>
+    <div>
+        我的姓名是{{myname}}-----{{age123}}
+    </div>
+</template>
+<template id='age'>
+    <div>
+        我的年龄是{{myage}}
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // data computed methods props  属性名不能重复
+    // 我们在父组件使用某个组件时， 在组件的行内定义一个 自定义上的行内属性
+    // 然后 组件通过props接收时， 需要接收上边定义的行内属性名作为变量
+    // 然后只能在组件里使用 刚才接收的属性名；
+    let name = {
+        template: '#name',
+        props: ['myname','age123'],
+        data() {
+            return {
+                name1: 123
+            }
+        },
+        created() {
+            console.log(this);
+        },
+    };
+    let age = {
+        template: '#age',
+        props: ['myage']
+    }
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "珠峰",
+            age: 0
+        },
+        components: {
+            'my-name': name,
+            age
+        }
+    });
+</script>

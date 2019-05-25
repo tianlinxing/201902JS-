@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <tab :data='[1,2,3]' @change='fn2'></tab>
+        <ul>
+            <li v-for='(item,index) in [5,6,7]' v-show='index==num' :key = 'index'>{{item}}</li>
+        </ul>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        <div v-for='(item,index) in data' :key='index' @click='fn(index)'>{{item}}</div>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:'#son',
+        props:['data'],
+        data() {
+            return {
+                
+            }
+        },
+        methods: {
+            fn(n){
+                // 触发自定义事件
+                this.$emit('change',n)
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            num:0
+        },
+        methods: {
+            fn2(n){
+                console.log(n)
+                this.num = n;
+            }
+        },
+        components:{
+            tab:son
+        }
+    });
+</script>

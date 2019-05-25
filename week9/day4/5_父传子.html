@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='name'>
+        <input type="text" v-model='age'>
+        {{ary}}
+        <h1>{{name}}</h1>
+        <com1  :www='age' :ary='ary'></com1>
+        
+    </div>
+</body>
+</html>
+<template id='com1'>
+    <div>
+        <h1>我的姓名{{qqq}}</h1>
+        <!-- <h1>我的年龄{{www}}</h1> -->
+        <!-- {{obj}} -->
+        <button @click='fn'>按钮</button>
+        <!-- 点击按钮 把 qqq 的值改成 666 -->
+        <!-- 
+            props的数据流向 是从父组件流向子组件；不能直接在子组件修改props
+            接收的数据；会有一个警告；
+            若是一个引用数据类型， 我们是可以直接修改引用数据类型内部的属性；
+
+        -->
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let com1 = {
+        template:"#com1",
+        // props:['qqq','www','obj','ary'],
+        props:{
+            qqq:{
+                type:String, // type 可以用来限制传进来的数据类型；多个类型 [Number,String]
+                default:'这是个默认值', // 当没有给该属性传值的时候 会走这个默认值；
+                // required:true, // 该属性值 是否是必传的
+                validator(val){
+                    // 可以自定义 传进来的数据的规则；
+                    console.log(val)
+                    return true
+                }
+            },
+            www:{
+                default:18
+            },
+            obj:{
+                // 若是数组或者对象的时候 默认值必须是一个函数 然后返回一个默认值
+                default(){
+                    return {
+
+                    }
+                }
+            }
+        },
+        methods: {
+            fn(){
+                // this.qqq = 666;
+                this.ary.push(100);
+                // this 是指向当前实例的；
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            age:0,
+            ary:[1,2,3,4]
+        },
+        components:{
+            com1
+        },
+        computed: {
+            obj(){
+                // obj 依赖于name 和 age；
+                return{
+                    name:this.name,
+                    age:this.age
+                }
+            },
+            ooo:{
+                get(){},
+                set(){}
+            }
+        },
+    });
+</script>

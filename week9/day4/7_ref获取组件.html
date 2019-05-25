@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h2>子组件的名字是{{sonname}}</h2>
+        <input type="text" v-model='name'>
+        <com1 :parent_name='name' @parentfn='fn' ref='mycom'></com1>
+        <!-- 
+            父传子 ： 通过自定义属性  :parennt_name
+            子传父 ： 通过自定义事件  @parentfn
+        -->
+    </div>
+</body>
+</html>
+<template id='com1'>
+    <div>
+        <input type="text" v-model='son' @input='sonfn'>
+        我的名字是 {{son}};
+        父组件的名字是{{parent_name}}
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let com1 = {
+        template:'#com1',
+        props:['parent_name'],
+        data() {
+            return {
+                son:"珠峰"
+            }
+        },
+        methods: {
+            sonfn(){
+                this.$emit('parentfn',this.son)
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            sonname:''
+        },
+        mounted() {
+            // 通过ref  我们不仅可以获取元素  也可以获取组件；
+            // 获取组件之后， 组建里边的方法和属性 我们都可以直接调用
+            console.log(this.$refs.mycom)
+        },
+        components:{
+            com1
+        },
+        methods: {
+            fn(val){
+                this.sonname = val;
+            }
+        },
+    });
+</script>

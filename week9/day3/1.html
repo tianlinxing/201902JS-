@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <qqq>
+            <template #header>
+                <div >头部</div>
+            </template>
+            <template v-slot:default='qqq'>
+                <div>
+                    hello {{name}}
+                    {{qqq}}
+                </div>
+            </template>
+            
+            <template #footer>
+                <div >
+                    hello footer
+                </div>
+            </template>
+        </qqq>
+    </div>
+</body>
+</html>
+<template id='qqq'>
+    <div>
+        this is my component
+        <button @click='fn'>333</button>
+        <slot name='header'></slot>
+        <slot :user='user'>
+            {{user.aa}}
+        </slot>
+        <slot name='footer'></slot>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let f1,f2;
+    Vue.component('qqq',{
+        template:'#qqq',
+        data(){
+            return {
+                user:{
+                    aa:123,bb:345
+                }
+            }
+        },
+        methods: {
+            fn(){
+                console.log(this.fn);
+                f1 ? f2 = this.fn : f1 = this.fn
+            }
+        },
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        }
+    });
+</script>

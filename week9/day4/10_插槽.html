@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <model 
+            title='hello' 
+            content='中间内容'
+            @sure='fn1'
+            @cancel='fn2'
+            v-show='show'
+        ></model>
+        <h1>{{name}}</h1>
+        <com1>
+            <div>
+                <h2>
+                    <h3>
+                            hello world {{name}}
+                    </h3>
+                </h2>
+            </div>
+        </com1>
+    </div>
+</body>
+</html>
+
+<template id='com1'>
+    <div>
+        <slot></slot>
+        <h1>子组件</h1>
+        <slot></slot>
+        <!-- 
+            slot: 被 com1标签包含的内容 
+            匿名插槽；
+        -->
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let com1 = {
+        template: '#com1',
+        data() {
+            return {
+                
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            com1
+        }
+    });
+</script>
+
+<!-- 
+
+    <model 
+        :title='hello' 
+        :content='中间内容'
+        @sure='fn1'
+        @cancel='fn2'
+        v-show='show'
+    ></model>
+    button
+
+
+ -->

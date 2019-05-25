@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>子组件的姓名{{name}}</h1>
+        <myson @myselffn='fn'></myson>
+
+        <tab :data='[1,2,3]' @change='fn2'></tab>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        子组件<input type="text" v-model='sonname' @input='sonfn'>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:"#son",
+        data() {
+            return {
+                sonname:""
+            }
+        },
+        methods: {
+            sonfn(){
+                // 通过 $emit 触发自定义事件 第一个参数是我们自己定义的事件名
+                //                          第二个参数及以后都是传过去的参数
+                this.$emit('myselffn',this.sonname)
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        methods: {
+            fn(val){
+                this.name = val;
+            },
+            fn2(n){
+                console.log(n)
+            }
+        },
+        components:{
+            myson:son
+        }
+    });
+</script>
+<!-- 
+    子传父： 现在自组件使用的标签 行内 写一个自定义事件名  @自定义事件=‘父组件的函数fn’
+    在子组件的对应函数内  我们使用 this.$emit('自定义事件名',要传给父组件使用的数据qqq)
+    父组件的函数fn 函数体是： 
+    fn(val,val2,val3){
+        // val 就是 qqq
+        this.xxx = val;
+    }
+-->
