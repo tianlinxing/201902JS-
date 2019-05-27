@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <com1>
+            <div>123</div>
+            <h3>456{{name}}</h3>
+            <button @click='name="哈哈哈"'>按钮</button>
+            文本
+        </com1>
+        ----------------------------------------------------------
+        <com1></com1>
+    </div>
+</body>
+</html>
+<template id='com1'>
+    <div>
+        <h1>这是一个局部组件</h1>
+        <!-- slot vue插槽； 把com1标签包含的整体显示到 slot标签的位置 -->
+        <!-- slot标签内部也可以书写内容， 不过这部分内容属于 默认的内容
+            默认内容： 当com1标签不包含任何内容是 才会在slot标签的位置显示默认内容
+        -->
+        <slot><h1>这是slot的默认内容</h1></slot>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let com1 = {
+        template:'#com1',
+        data(){
+            return{
+
+            }
+        }
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            com1
+        }
+    });
+</script>

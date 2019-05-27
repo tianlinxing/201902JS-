@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <router-link :to="{path:'/com1'}" >com1</router-link>
+        <router-link :to="{name:'mycom1',params:{a:12,b:13}}">com1</router-link>
+        <!-- params传参 只能结合 别名使用； 不能使用path； -->
+        <!-- path query name params 都是规定的 -->
+        <!-- params中的属性名 是根据 路由映射表中的 path:'/xxx/:属性名1/:属性名2' 属性名1和属性名2-->
+
+        <router-link :to="{path:'/com2?a=13'}">com2</router-link>
+        <router-link :to="{path:'/com3'}" active-class='qqq'>com3</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let com1 = {
+        template:`<h2>组件111111111</h2>`,
+        created() {
+            console.log(this);
+        },
+    };
+    let com2 = {
+        template:`<h2>组件2222222222</h2>`
+    };
+    let com3 = {
+        template:`<h2>组件3333333333</h2>`
+    };
+    let routes = [
+        {
+            path:'/com1/:a/:b',
+            name:'mycom1',// 别名
+            component:com1
+        },
+        {
+            path:'/com2?a=12',
+            name:'mycom2',// 别名
+            component:com2
+        },
+        {
+            path:'/com3',
+            name:'mycom3',// 别名
+            component:com3
+        },
+    ];
+    let router = new VueRouter({
+        routes,
+        linkActiveClass:'current123',
+        // 所有的被匹配的路径的默认类名改成current123,行内属性 active-class 等级较高；
+        linkExactActiveClass:'current'
+    })
+    let vm = new Vue({
+        el:'#app',
+        router,
+        data:{
+            name:"珠峰"
+        }
+    });
+</script>
+<!-- 
+    query传参：  使用path 或 name 都可以 :to={path:'/xxx',query:{a:12,b:13}}
+                                        :to={name:'别名',query:{a:12,b:13}}
+        获取: 通过 this.$route.query                                
+
+    params传参： 只能使用 name;  :to={name:"别名",params:{a:12,b:13}}
+        需要配路由映射表来使用， {path:'/xxx/:a/:b',name:"别名",component:xxx}
+        有时也把params传参称为   路径传参
+        获取： 通过 this.$route.params
+-->

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            position: fixed;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .middle_box{
+            position: relative;
+            margin: 50px auto;
+            width: 400px;
+            height: 300px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <model 
+            v-show='flag'
+            :title='title'
+            content='内容部分'
+            @sure='fn'
+            @cancel='fn2'
+        ></model> -->
+
+        <model v-show='flag' 
+            :title='title' 
+            @sure='fn' 
+            @cancel='fn2' 
+            :showcancel='true'>
+            <div>
+                slot 定义的内容
+            </div>
+            <template v-slot:myfooter>
+                <div>
+                    <button>确定</button>
+                </div>
+            </template>
+            <!-- 另一种方式是 使用 具名插槽 -->
+        </model>
+
+        <button @click='flag=true'>显示模态框</button>
+        <h1>{{name}}</h1>
+    </div>
+</body>
+</html>
+<template id='com1'>
+    <div class='box'>
+        <div class='middle_box'>
+            <header>{{title}}</header>
+            <main>
+                <slot></slot>
+            </main>
+            <slot name='myfooter'>
+                <footer>
+                    <button v-if='showcancel' @click='$emit("cancel",1,2,3)'>取消</button>
+                    <button @click='$emit("sure",4,5,6,7)'>确定</button>
+                </footer>
+            </slot>
+            
+        </div>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let com1 = {
+        template:'#com1',
+        props:['title','content','showcancel']
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:false,
+            title:'123'
+        },
+        methods: {
+            fn(){
+                console.log('sure:',arguments);
+                this.flag = false;
+            },
+            fn2(){
+                console.log('cancel:',arguments)
+                this.flag = false;
+            }
+        },
+        components:{
+            model:com1
+        }
+    });
+</script>

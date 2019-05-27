@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <com1>
+            <div>123</div>
+            <h3>456{{name}}</h3>
+            <button @click='name="哈哈哈"'>按钮</button>
+            文本
+        </com1>
+        ----------------------------------------------------------
+        <com1></com1>
+        ---------------------------------------------------------】
+        <com1>
+            <div slot='myheader'>用户定义的头部</div>
+            <div slot='mymain'>用户定义的身体</div>
+            <div slot='myfooter'>用户定义的尾部</div>
+
+            <template v-slot:mynewheader>
+                <h3>这是新版slot</h3>
+                <h3>sgesgsgfsgfs</h3>
+            </template>
+        </com1>
+        <!--  
+            具名插槽： 在自定义组件包含的内容中 给对应的元素添加一个 行内属性 slot；
+            对应的值是自定义的；
+
+            在组件的模板中使用slot标签；给slot标签添加一个对应的name属性； 值是 刚才自定义的值
+        -->
+    </div>
+</body>
+</html>
+<template id='com1'>
+    <div>
+        <h1>这是一个局部组件</h1>
+        <slot name='default'><h1>这是slot的默认内容</h1></slot>
+        <!-- 
+            不写 name属性 相当于写了一个 name='default'
+            对应的内容是 没有加 slot（v-slot）行内属性的哪些元素
+        -->
+
+        <slot name='mynewheader'></slot>
+        <header>
+            这是个头部
+            <slot name='myheader'></slot>
+        </header>
+        <main>
+            这是个身体
+            <slot name='mymain'></slot>
+        </main>
+        <footer>
+            这是个尾部
+            <slot name='myfooter'></slot>
+        </footer>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let com1 = {
+        template:'#com1',
+        data(){
+            return{
+
+            }
+        }
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            com1
+        }
+    });
+</script>
