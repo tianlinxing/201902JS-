@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" placeholder="姓名" v-model='name'>
+        <input type="text" placeholder="年龄" v-model='age'>
+        <button @click='fn'>提交</button>
+
+        <adult></adult>
+        <child></child>
+    </div>
+</body>
+
+</html>
+<!-- 
+    两个子组件  
+    一个子组件展示成年人  
+    一个组件展示未成年人 
+    在根组件中，有两个输入框 一个输入姓名  一个输入年龄；
+    下边有一个按钮 点击按钮；
+    根据年龄， 把成年人 展示到成年组件；
+            未成年人 展示到 未成年组件
+-->
+<template id='adult'>
+    <div>
+        <h1>成年人</h1>
+        <ul>
+            <li v-for='(item,index) in adultAry' :key='index'>
+                姓名：{{item.name}};</br>
+                年龄：{{item.age}}
+            </li>
+        </ul>
+    </div>
+</template>
+<template id='child'>
+    <div>
+        <h1>未成年人</h1>
+        <ul>
+            <li v-for='(item,index) in childAry' :key ='index'>
+                姓名：{{item.name}};</br>
+                年龄：{{item.age}}
+            </li>
+        </ul>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vuex/dist/vuex.js"></script>
+<script>
+    let adult = {
+        template: '#adult',
+        computed: {
+            adultAry(){
+                //成年数组
+                return this.$store.state.arr.filter(item=>{
+                    return item.age >= 18
+                })
+            }
+        },
+    };
+    let child = {
+        template: '#child',
+        computed: {
+            childAry(){
+                return this.$store.state.arr.filter(item=>{
+                    return item.age < 18
+                })
+            }
+        },
+    }
+    const store = new Vuex.Store({
+        state:{
+            arr:[]
+        },
+        mutations:{
+            changeArr(state,options){
+                state.arr.push(options)
+            }
+        }
+    })
+    let vm = new Vue({
+        el: '#app',
+        store,
+        components: {
+            adult,
+            child
+        },
+        data: {
+            name: "珠峰",
+            age:0
+        },
+        methods: {
+            fn(){
+                let obj = {
+                    name:this.name,
+                    age:this.age
+                };
+                this.$store.commit('changeArr',obj);
+                this.name = '';
+                this.age = ''
+            }
+        },
+    });
+</script>

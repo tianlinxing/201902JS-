@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <com1>
+            123
+            <div>345</div>
+            <h1 slot='myh1'>我是h1</h1>
+            <template v-slot:myh3>
+                <h3>我是新版写法</h3>
+            </template>
+            <i>567</i>
+        </com1>
+        <com1></com1>
+    </div>
+</body>
+</html>
+<template id='com1'>
+    <div>
+        <h1>这是个子组件1</h1>
+        <slot name='default'>
+            默认内容
+            当com1标签没有包含任何内容时，就显示当前的文本
+        </slot>
+        <slot name='myh1' >
+            <!-- 自己查看 对于slot标签使用 v-bind的效果 -->
+            myh1的默认内容
+        </slot>
+        <slot name='myh3'>
+            myh3的默认内容
+        </slot>
+        <div>------------------------------------</div>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let com1 = {
+        template:'#com1',
+        data() {
+            return {
+                
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        components:{
+            com1
+        },
+        data:{
+            name:"珠峰"
+        }
+    });
+     /*
+        组件： 全局组件  局部组件；
+        父传子： 1、<com1 myname='1234'></com1> 自定义属性
+                    子组件通过props接收；props:['myname']  
+                                    props:{myname:{default:'abc'}}
+                                    props:{
+                                        myname:{
+                                            type:Number,// [Number,String]
+                                            required:true,
+                                            default(){
+                                                return []
+                                            },
+                                            validator(val){
+                                                // 用户自定义规则用的
+                                                // return false 回报一个红色警告
+                                            }
+                                        }
+                                    }
+                2、this.$parent  获取父组件，既可以修改也可以使用； 不建议使用；
+        子传父： 1、自定义事件  <com1 @myevent='fn'></com1>    
+                子组件 通过触发(this.$emit('myevent',传给父组件的参数)) 自定义事件的方式
+                来执行 对应的 fn 函数； 然后通过参数传递； 把子组件的数据传给父组件                        
+                2、this.$refs; ref既能获取元素 也能获取组件；
+                
+        eventBus   创造一个空的vue实例； 通过$on 订阅一个事件； 通过 $emit发布对应事件 ；
+        
+        // vue 的内部组件  template  transition  slot  component 
+
+        <component is='组件名'></component> 
+        <keep-alive></keep-alive> 保证已经加载的组件不被销毁
+        
+
+    */
+</script>

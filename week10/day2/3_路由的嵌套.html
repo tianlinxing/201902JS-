@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <div>
+            <router-link to='/home?a=12&b=13' active-class='current' tag='button'>首页</router-link>
+            <router-link :to='{name:"mylist",params:{name:"小红",age:20}}'>列表页</router-link>
+            <router-link :to='{name:"myuser",query:{a:12,c:14},params:{name:456}}'>用户中心</router-link>
+        </div>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+
+</html>
+<template id='home'>
+    <div>
+        <h1>这是首页</h1>
+
+        <router-link to='/home/nav'>nav</router-link>
+        <router-link to='/home/nav2'>nav2</router-link>
+        
+        <!-- 这个router-view渲染的是 home下的子路由对应的组件 -->
+        <router-view></router-view>
+    </div>
+</template>
+<template id='list'>
+    <div>
+        <h1>这是列表页</h1>
+        <router-link :to="{name:'mylist2'}">qqq</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<template id='user'>
+    <div>
+        <h1>这是用户中心</h1>
+    </div>
+</template>
+<template id='nav'>
+    <div>
+        <h3>这是二级路由对应的组件1</h3>
+    </div>
+</template>
+<template id='nav2'>
+    <div>
+        <h3>这是二级路由对应的组件2</h3>
+    </div>
+</template>
+<template id='list2'>
+    <div>
+        <h2>这是list下的二级路由组件</h2>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {
+        template: '#home',
+        data() {
+            return {
+
+            }
+        },
+    };
+    let list = {
+        template: '#list',
+        data() {
+            return {
+
+            }
+        },
+    };
+    let user = {
+        template: '#user',
+        data() {
+            return {
+
+            }
+        },
+    };
+    let nav = {
+        template: '#nav'
+    };
+    let nav2 = {
+        template: '#nav2'
+    };
+    let list2 = {
+        template:'#list2'
+    }
+    // 编写路由映射表
+    const routes = [{
+            path: '/home',
+            component: home,
+            children: [
+                // 子路由
+                {
+                    path: '/home/nav',
+                    component: nav
+                },
+                {
+                    path: '/home/nav2',
+                    component: nav2
+                }
+            ]
+        },
+        {
+            path: '/list/:name/:age',
+            name: 'mylist',
+            component: list,
+            children:[
+                {
+                    path:'/list/:name/:age/list2',
+                    name:'mylist2',
+                    component:list2
+                }
+            ]
+        },
+        {
+            path: '/user/:name',
+            name: 'myuser',
+            component: user
+        }
+    ];
+    // 3、创造 router实例
+    const router = new VueRouter({
+        routes: routes,
+        linkActiveClass: 'active', // 统一设置  路径匹配的 元素的类名
+    });
+    // 4、把创造的router实例 注册到 根实例中
+    let vm = new Vue({
+        el: '#app',
+        router: router,
+        data: {
+            name: "珠峰"
+        }
+    });
+</script>

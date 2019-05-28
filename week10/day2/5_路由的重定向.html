@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <div>
+            <router-link to="/home">首页</router-link>
+            <router-link to='/list'>列表页</router-link>
+        </div>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+
+</html>
+<template id='home'>
+    <div>
+        <h2>首页</h2>
+        <router-link to='/home/nav1'>nav1</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<template id='list'>
+    <div>
+        <h2>列表页</h2>
+        <router-link to='/list/nav2'>nav2</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<template id='nav1'>
+    <div>
+        <h3>这是首页下的子组件</h3>
+    </div>
+</template>
+<template id='nav2'>
+    <div>
+        <h3>这是列表页下的子组件</h3>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {
+        template: '#home'
+    };
+    let list = {
+        template: '#list'
+    };
+    let nav1 = {
+        template: '#nav1'
+    };
+    let nav2 = {
+        template: '#nav2'
+    };
+    let page404 = {
+        template:'<h2>自己的404</h2>'
+    }
+    // 路由的嵌套可以是无限嵌套的
+    const routes = [
+        {
+            path:'/',//一打开页面 默认路径是 /
+            redirect:'/home' // 重定向 ， 把当前路径(path对应的值)重定向到 /home
+        },
+        {
+            path:'/home',
+            component:home,
+            redirect:'/home/nav1',
+            children:[
+                {
+                    path:'/home/nav1',
+                    component:nav1
+                },
+                {
+                    path:'/home/*',
+                    redirect:'/home/nav1'
+                }
+            ]
+        },
+        {
+            path:'/list',
+            component:list,
+            redirect:'/list/nav2',
+            children:[
+                {
+                    path:'nav2', // 不写斜杠  默认直接从父路由下 往后补
+                    component:nav2
+                }
+            ]
+        },
+        {
+            path:'/404',
+            component:page404
+        },
+        {
+            path:'/*',// 当前的地址栏的路径没有匹配到任何以有的 路由；就会走到当前的这个路由
+            redirect:'/404'
+        }
+    ];
+    const router = new VueRouter({
+        mode:'hash',
+        routes,
+        linkActiveClass:'current'
+    })
+    let vm = new Vue({
+        el: '#app',
+        router,
+        data: {
+            name: "珠峰"
+        }
+    });
+</script>
