@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name' placeholder="姓名">
+        <input type="number" v-model='age' placeholder="年龄">
+        <button @click='fn'>提交</button>
+        <button @click='fn2'>异步提交</button>
+        <child></child>
+        <adult></adult>
+    </div>
+</body>
+
+</html>
+<template id='adult'>
+    <div>
+        <h2>成年人</h2>
+        <ul>
+            <li v-for="(item,index) in ary" :key="index">
+                姓名：{{item.name}} <br>
+                年龄：{{item.age}}
+            </li>
+        </ul>
+    </div>
+</template>
+<template id='child'>
+    <div>
+        <h2>未成年人</h2>
+        <ul>
+            <li v-for="(item,index) in ary" :key="index">
+                姓名：{{item.name}} <br>
+                年龄：{{item.age}}
+            </li>
+        </ul>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vuex/dist/vuex.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+    let adult = {
+        template: '#adult',
+        computed: {
+            ary() {
+                return this.$store.state.adultAry
+            }
+        },
+    };
+    let child = {
+        template: '#child',
+        computed: {
+            ary() {
+                return this.$store.state.childAry
+            }
+        },
+    };
+    const state = {
+        count: 0,
+        adultAry: [],
+        childAry: []
+    }
+    const mutations = {
+        changeAdult(state, options) {
+            state.adultAry.push(options.obj)
+        },
+        changeChild(state, options) {
+            state.childAry.push(options)
+        }
+    }
+    const actions = {
+        // 这里边存储的也是一些函数，这里的函数可以是异步的
+        // changeAdultFn(context,options){
+        //     // context 包含 commit函数  和  state
+        //     console.log(arguments)
+        // },
+        changeAdultFn({commit},options){
+            // context 包含 commit函数  和  state
+            // 可以通过 commit 触发 mutations中的函数；
+            axios.get('https://yesno.wtf/api').then((data)=>{
+                // 根据后台返回 yes 或 no 来决定 name属性后边跟的是 男或者 女
+                if(data.data.answer =='yes'){
+                    options.name += '-男'
+                }else{
+                    options.name += '-女'
+                }
+                // 下一步 我们要去使用 mutations中的方法 改变 state中的数据；
+                if(options.age >=18){
+                    commit('changeAdult',{obj:options})
+                }else{
+                    commit('changeChild',options)
+                }
+            }).catch(()=>{
+                alert('失败')
+            })
+            console.log(arguments)
+        },
+        getData(){
+            // 我们一般会把ajax请求都放到 actions 中管理
+            return axios.get('https://yesno.wtf/api')
+        }
+    }
+    const store = new Vuex.Store({
+        state: state,
+        mutations,
+        actions
+    })
+    let vm = new Vue({
+        el: '#app',
+        store,
+        components: {
+            adult,
+            child
+        },
+        data: {
+            name: "珠峰",
+            age: 0
+        },
+        methods: {
+            fn() {
+                // 根据 age 来判断把数据放到哪个数组中
+                let obj = {
+                    name: this.name,
+                    age: this.age
+                }
+                if (this.age >= 18) {
+                    this.$store.commit('changeAdult', {
+                        obj: obj,
+                        a: 12
+                    })
+                    //                              传递的参数， 看自己的业务需求
+                } else {
+                    this.$store.commit('changeChild', obj)
+                }
+            },
+            fn2(){
+                // 要触发actions中的函数 ；通过 this.$store.dispatch('对应函数名',要传的参数)
+                // commit  科蜜特
+                // dispatch  迪斯排吃
+                let obj = {
+                    name:this.name,
+                    age:this.age
+                }
+                this.$store.dispatch('changeAdultFn',obj);
+                // this.$store.dispatch('changeAdultFn',{name:this.name,age:this.age});
+                
+                let p = this.$store.dispatch('getData');
+                console.log(p);
+                p.then((data)=>{
+                    // p 就是axios返回 Promise 实例
+                    console.log(data)
+                })
+            }
+        },
+    });
+</script>

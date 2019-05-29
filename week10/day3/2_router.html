@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <router-link to='/com1'>com1</router-link>
+        <router-link :to='{name:"mycom1",params:{q:12,w:23}}'>com1</router-link>
+        <router-link to="/com2">com2</router-link>
+        <router-link :to="{path:'/com2',query:{a:12,b:13}}">com2</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+
+</html>
+<template id='com1'>
+    <div>
+        子组件1
+        <router-view></router-view>
+    </div>
+</template>
+<template id='com2'>
+    <div>
+        子组件2
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let com1 = {
+        template: '#com1'
+    }
+    let com2 = {
+        template: '#com2'
+    }
+    let hi = {
+        template:'<h2>hi</h2>'
+    }
+    const routes = [
+        {
+            path:'/',
+            redirect:'/com1'
+        },
+        {
+            path:'/com1',
+            component:com1,
+            name:'mycom1',
+            meta:{
+                // 路由元信息
+                mytil:'组件1'
+            },
+            children:[
+                {
+                    path:'hi',// 路径 要不就不写斜杠； 要写的话就写全
+                    component:hi
+                }
+            ]
+        },
+        {
+            path:'/com2',
+            component:com2,
+            name:'mycom2',
+            meta:{
+                mytil:"组件2"
+            }
+        },
+        {
+            path:'/*',
+            // redirect:'/com3' // 一定要是一个已经存在的路径
+            redirect:'/com1'
+        }
+    ];
+    const router = new VueRouter({
+        routes,
+        mode:'hash',
+        linkActiveClass:'active'// 默认 router-link-active
+    })
+    router.beforeEach((to,from,next)=>{
+        // to 将要跳转的 路由
+        // from 从那个路由过来的
+        // next 事必须执行的一个函数
+        // 可以执行一些  修改 title ；或者 做一些权限的处理
+        document.title = to.meta.mytil
+        next()
+    })
+    let vm = new Vue({
+        el: '#app',
+        router,
+        data: {
+            name: "珠峰"
+        }
+    });
+    // {name  path  query  params}
+    // 编程式导航 ： push({}) replace  back go // 一般涉及到异步的时候会用到
+
+
+</script>

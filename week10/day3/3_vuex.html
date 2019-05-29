@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h2>{{$store.state.count}}</h2>
+        <h2>{{mycount}}</h2>
+
+        <button @click='fn'>add</button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vuex/dist/vuex.js"></script>
+<script>
+    const store = new Vuex.Store({
+        state:{
+            // 存放公用数据
+            count:0
+        },
+        mutations:{
+            // 组件 通过  this.$store.commit('mutations中的函数名',传参)
+            // 这里的函数必须是同步
+            add(state,options){
+                // setTimeout(() => {
+                    state.count++;
+                // }, 1000);
+            }
+        }
+    })
+    let vm = new Vue({
+        el:'#app',
+        store, // 所有的组件中都有一个 $store的属性；
+        data:{
+            name:"珠峰"
+        },
+        computed: {
+            mycount(){
+                return this.$store.state.count;
+            }
+        },
+        methods: {
+            fn(){
+                this.$store.commit('add',{a:12,b:12})
+                console.log(this.$store.state.count)
+                this.$store.state.count += 10;
+            }
+        },
+    });
+</script>
