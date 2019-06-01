@@ -8,12 +8,14 @@
         <button @click='add2'>异步增加</button> -->
         <mytil>首页</mytil>
         <my-swiper></my-swiper>
+        <hotbook></hotbook>
     </div>
 </template>
 
 <script>
 import title from '../../common/title.vue'
 import mySwiper from './swiper.vue'
+import hotbook from './hotbook.vue'
     export default {
         data() {
             return {
@@ -22,7 +24,8 @@ import mySwiper from './swiper.vue'
         },
         components:{
             mytil:title,
-            'my-swiper':mySwiper
+            'my-swiper':mySwiper,
+            hotbook
         },
         computed: {
             count() {
