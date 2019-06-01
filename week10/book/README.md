@@ -10,3 +10,7 @@ yarn install
 yarn run serve
 ```
 
+
+vue的配置文件
+vue.config.js  跟 package.json 同级
+

@@ -1,12 +1,17 @@
 <template>
     <div>
-        收藏页
+        <mytil>收藏页</mytil>
+        
+        
     </div>
 </template>
 
 <script>
+import title from '../../common/title.vue'
     export default {
-        
+        components:{
+            mytil:title
+        }
     }
 </script>
 

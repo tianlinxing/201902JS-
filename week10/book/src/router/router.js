@@ -17,7 +17,8 @@ Vue.use(Router) // Vue.component   VUe.prototype
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes:bookR.concat(ary)
+  routes:bookR.concat(ary),
+  linkActiveClass:'current'
   // routes: [
   //   {
   //     path: '/',

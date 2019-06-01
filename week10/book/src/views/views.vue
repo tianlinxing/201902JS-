@@ -35,9 +35,14 @@
     font-size: 0.4rem;
     display: flex;
     align-items: center;
+    box-shadow: 0px -0.02rem 0.1rem 0px #ccc;
     a{
       flex: 1;
-      text-align: center
+      text-align: center;
+      &.current{
+        color:aquamarine;
+      }
     }
+
   }
 </style>
