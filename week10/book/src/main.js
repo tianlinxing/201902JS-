@@ -9,6 +9,9 @@ import './less/common.less'
 // 引入  swiper的 css文件
 import  'swiper/dist/css/swiper.min.css'
 
+// 引入所有的过滤器；
+import './filter/index.js'
+
 Vue.config.productionTip = false
 
 new Vue({

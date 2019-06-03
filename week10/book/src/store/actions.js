@@ -21,3 +21,10 @@ export const getHomeList = ()=>{
     // 调取 首页 下 的  列表数据
     return axios.get('/api/homeList')
 }
+
+// 获取列表页的初始数据
+export const getListData = ({commit})=>{
+    axios.get('/api/listData').then((data)=>{
+        commit('changeList',data.data);// 触发mutations中的函数
+    })
+}

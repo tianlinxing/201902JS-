@@ -15,7 +15,7 @@ let ary = [
 Vue.use(Router) // Vue.component   VUe.prototype
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes:bookR.concat(ary),
   linkActiveClass:'current'
