@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--  
+        git clone  远程地址
+        一般克隆下的都是master分支
+        git branch  分支名      git checkout 分支名
+        git checkout -b 分支名  以上两个命令的合并
+
+        git add .  提交到暂存区
+        git commit -m '备注'  提交到历史区
+        git push   第一次在这个分支提交 会有一个提示 ；按照提示提交
+        // 仨远程： github gitlab  码云
+
+
+        远程有个分支 dev ;
+        克隆到本地之后， 本地没有 dev;
+        需要我们新建一个本地的dev 
+        然后执行 git branch --set-upstream-to=origin/dev  建立本地和远程的关系
+
+        dev 是你同事的开发分支，你要在这个分支上开发，最好自己再去心切一个分支
+
+        比如 在dev 分支上新建了一个 mydev
+        git checkout -b mydev;
+        然后在 mydev上开发；
+        每天都合并一次 dev;保证自己的分支的代码能正常运行
+
+
+        git log 看历史信息
+
+        git reset --hard 版本号 回滚
+
+        git remote -v  查看远程仓库地址的
+    -->
+</body>
+</html>

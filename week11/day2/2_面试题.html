@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    /*
+    实现一个LazyMan，可以按照以下方式调用:
+     1) LazyMan(“Hank”)输出:
+     Hi! This is Hank!
+
+     2) LazyMan(“Hank”).sleep(10).eat(“dinner”)输出
+     Hi! This is Hank!
+     //等待10秒..
+     Wake up after 10
+     Eat dinner~
+
+     3) LazyMan(“Hank”).eat(“dinner”).eat(“supper”)输出
+     Hi This is Hank!
+     Eat dinner~
+     Eat supper~
+
+     4) LazyMan(“Hank”).eat(“dinner”).sleepFirst(5).eat(“supper”)输出
+     //等待5秒
+     Hi This is Hank!
+     Wake up after 5
+     Eat supper*/
+
+    class Man{
+        constructor(str){
+            // 代表 Man的函数体
+            this.ary = [];
+            // 用这个数组去存放要去执行的事件，
+            // 再去设立一个专门的函数去执行数组中的事件
+            // console.log(`hi this is ${str}`);
+            // this.next(); 不好使 是因为这时数组是个空数组，
+            //             我们需要 在 eat和 sleep执行完成之后再去执行 next函数；
+            let f = ()=>{
+                console.log(`hi this is ${str}`);
+                this.next();
+            }
+            this.ary.push(f);
+            setTimeout(() => {
+                // 异步函数 会在同步执行完成之后 执行
+                // 在这里使用定时器跟时间没关系 只是要一个异步函数
+                this.next()
+            });
+        }
+        next(){
+            // debugger;
+            let f = this.ary.shift();
+            f && f();
+        }
+        eat(str){
+            // console.log(`EAT ${str} ~~`);
+            let f = ()=>{
+                // 定义一个事件， 放到 this.ary中
+                console.log(`EAT ${str} ~~`);
+                this.next()
+            }
+            this.ary.push(f);
+            return this
+        }
+        sleep(t){
+            // setTimeout(() => {
+            //     console.log('睡了3s')
+            // }, t*1000);
+            let f = () => {
+                setTimeout(() => {
+                    console.log('睡了3s');
+                    this.next();
+                }, t*1000);
+            }
+            this.ary.push(f);
+            return this
+        }
+        sleepFirst(n){
+            let f = ()=>{
+                setTimeout(() => {
+                    console.log(`先睡了${n}s`);
+                    this.next();// 接着调用事件池中的函数
+                }, n*1000);
+            }
+            this.ary.unshift(f);
+            return this
+        }
+    }
+
+    function LazyMan(str) {
+        return new Man(str) 
+    }
+
+    LazyMan('TOM').sleep(2).eat('苹果').sleep(3).eat('香蕉').eat('香蕉').eat('香蕉').sleepFirst(5)
+</script>

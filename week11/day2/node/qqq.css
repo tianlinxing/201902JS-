@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+div {
+  width: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+}
+div a {
+  text-decoration: none;
+}

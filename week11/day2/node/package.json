@@ -1,0 +1,20 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "qqq": "lessc 1.less qqq.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
