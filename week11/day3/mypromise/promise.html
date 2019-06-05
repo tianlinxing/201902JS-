@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function MyPromise(fn) {
+        let self = this;// 使用变量  是为了保证 this的指向；
+        self.status = 'pending'; 
+        // status 是为了存储 promise 的状态，值分别是 pending  resolved  rejected
+
+        self.value = ''; // 用来存储成功的回调函数执行时传进来的参数
+        self.reason = ''; //用来存储失败的回调函数执行时传进来的参数
+
+        self.resCallback = []; // 用来放成功回调事件，当走到then中碰见状态时pending的时候；
+        self.rejCallback = [];
+
+        // 需要我们去定义两个函数  分别去对应 res 和 rej
+        function resolve(val) {
+            // promise规定 状态只能从 pending转成 rejected或resolved
+            // 一经改变  就不能再去修改 
+            if(self.status === 'pending'){
+                self.value = val; // 把传进来的参数赋给 value属性
+                self.status = 'resolved'; // 执行成功 函数， 我让 状态变成成功态；
+                self.resCallback.forEach(item=>{
+                    // item 是成功池子中的成功回调
+                    item&&item(val)
+                })
+            }
+        }
+        function reject(reason) {
+            if(self.status === 'pending'){
+                self.reason = reason;
+                self.status = 'rejected';
+                self.rejCallback.forEach(item=>{
+                    // item 是成功池子中的成功回调
+                    item&&item(reason)
+                })
+            }
+        }
+        try {
+            // 为了处理 fn执行失败的情况
+            fn(resolve,reject)
+        } catch (error) {
+            // fn执行失败 直接执行 reject
+
+            reject(error)   
+        }
+        
+    }
+    // then 函数是在 Mypromise的原型上
+    MyPromise.prototype.then = function(res,rej){
+        let self = this;
+        // 
+        // res2 对应的是 第2个then成功函数；
+        // rej2 对应的是 第2个then失败函数
+        let p = new MyPromise(function(res2,rej2){
+            // 怎么去判断让 res 执行还是 rej执行？根据当前的状态去判断让哪个函数执行
+            if(self.status === 'resolved'){
+                try {
+                    let val = res(self.value);
+                    res2(val)
+                } catch (error) {
+                    rej2(error)
+                }
+                
+            }
+            if(self.status === 'rejected'){
+                try {
+                    // 第一个then 的失败函数 执行成功之后； 把函数的return
+                    // 给第二个then的成功回调
+                    let val = rej(self.reason);
+                    res2(val);
+                } catch (error) {
+                    rej2(error);
+                }
+                
+            }
+            console.log(self.status)
+            if(self.status === 'pending'){
+                // 当前还是等待的状态，这种情况一般是异步造成的；
+                // self.resCallback.push(res);// 若是pending状态 就把成功回调放到成功事件池
+                // self.rejCallback.push(rej);//                    失败回调当到失败事件池
+                self.resCallback.push(function(val){
+                    try {
+                        let v = res(val);
+                        res2(v);
+                    } catch (error) {
+                        rej2(error)
+                    }
+                })
+                self.rejCallback.push(function (reason) {
+                    try {
+                        let v = rej(reason);
+                        res2(v)
+                    } catch (error) {
+                        rej2(error);
+                    }
+                })
+            }
+        })
+        return p;
+       
+    }
+
+    let p = new MyPromise(function (res,rej) {
+        // res(123)
+        // rej(345)
+        setTimeout(() => {
+            rej(111)
+        }, 2000);
+    });
+    p.then((data)=>{
+        console.log(data)
+    },(err)=>{
+        console.log(err);
+        return 'hello'
+    }).then((data2)=>{
+        console.log(data2)
+    },(err2)=>{
+        console.log(err2)
+    })
+</script>
