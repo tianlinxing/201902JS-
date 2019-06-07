@@ -3,7 +3,7 @@
     <el-container>
       <el-header>Header</el-header>
       <el-container class='content_box'>
-        <el-aside >
+        <el-aside width='200px'>
           <my-nav></my-nav>
           <!-- 导航部分 -->
         </el-aside>
@@ -14,10 +14,6 @@
       </el-container>
       <el-footer>Footer</el-footer>
     </el-container>
-
-      <router-link to="/table">table</router-link>
-      <router-link to="/info">info</router-link>
-      <router-view></router-view>
   </div>
 </template>
 
@@ -26,6 +22,11 @@
 import nav from './nav/nav.vue'
 export default {
   name: "home",
+  data() {
+    return {
+      flag: false
+    }
+  },
   components: {
     'my-nav':nav
   }

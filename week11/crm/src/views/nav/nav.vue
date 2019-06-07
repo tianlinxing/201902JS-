@@ -27,15 +27,20 @@
                 </el-menu>
             </el-col>
         </el-row>
-        <button @click='flag=!flag'>eee</button>
+        
     </div>
 </template>
 
 <script>
 export default {
+    props:{
+        flag:{
+            default:false
+        }
+    },
     data() {
         return {
-            flag:false
+            
         }
     },
     methods: {
