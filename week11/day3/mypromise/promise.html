@@ -110,6 +110,27 @@
        
     }
 
+    MyPromise.all = function (ary){
+        return new MyPromise(function(res,rej){
+            let done = gen(ary.lengt,res);
+            ary.forEach((item,index)=>{
+                item.then((data)=>{
+                    done(index,data)
+                },rej)
+            })
+        })
+    }
+    function gen(len,res) {
+        let value = [];
+        let count = 0;
+        return function (i,val) {
+            value[i]=val;
+            if(++count == len){
+                res(value)
+            }
+        }
+    }
+
     let p = new MyPromise(function (res,rej) {
         // res(123)
         // rej(345)
