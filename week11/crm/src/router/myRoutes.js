@@ -9,5 +9,10 @@ export default [
         path:'/info',
         name:'info',
         component: ()=>import('@/views/info/info.vue')
+    },
+    {
+        path:'/echarts',
+        name:'echarts',
+        component: ()=>import('@/views/echarts/echarts.vue')
     }
 ]

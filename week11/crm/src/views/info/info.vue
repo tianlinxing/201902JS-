@@ -37,6 +37,19 @@ export default {
       zip: ""
     };
   },
+  created() {
+      console.log(this.$route.query);
+      // 获取到 query上的数据之后 判断是否有数据，有的话就赋给 data中对应的属性
+      let obj = this.$route.query;
+      if(obj.id != undefined){
+          for(let k in obj){
+              if(k!='id'){
+                  //data中是没有 id这个属性的
+                  this[k]=obj[k]
+              }
+          }
+      }
+  },
   methods: {
     fn() {
       console.log(arguments);
@@ -54,8 +67,22 @@ export default {
             let obj = {
                 date,name,province,city,zip,address
             }
-            console.log(obj)
-            add(obj)
+            // 对于 obj来说  若有存在ID 就是编辑
+            if(this.$route.query.id != undefined){
+                obj.id = this.$route.query.id
+            }
+
+            // console.log(obj)
+            // 若添加（编辑）成功 就跳转到table页；否则提示用户 添加（编辑）失败
+            add(obj).then((data)=>{
+                //若 errorCode 为0 则代表 添加成功
+                if(data.errorCode == 0){
+                    this.$router.push('/table')
+                }else{
+                    let str = obj.id === undefined ? '失败' : '编辑失败'
+                    this.$message.error(str)
+                }
+            })
         }
         
     }

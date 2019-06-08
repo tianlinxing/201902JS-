@@ -111,12 +111,42 @@ http.createServer(function(req,res){
                             res.end(JSON.stringify(obj));// 成功 直接返回一个 errorCode:0 即可
                         })
                     })
+                }else{
+                    // 有ID  就是修改数据
+                    fs.readFile('./data.json','utf-8',(err,data)=>{
+                        if(err){
+                            res.end('error');
+                            return;
+                        }
+                        let tempAry = JSON.parse(data);
+                        // 找到对应ID的那条数据 然后修改
+                        // reqData.id
+                        tempAry = tempAry.map(item => {
+                            if(item.id == reqData.id){
+                                // id若想等  就返回期端传过来的数据
+                                // 否则返回原数组的值
+                                return reqData;
+                            }
+                            return item;
+                        });
+                        fs.writeFile('./data.json',JSON.stringify(tempAry),'utf-8',(err)=>{
+                            if(err){
+                                res.end('error')
+                                return 
+                            }
+                            res.end(JSON.stringify(obj))// 改写成功返回 errorCode :0
+                        })
+
+                    })
                 }
                 console.log(dataStr.toString());
                 // res.end('666')
             })
             break;
         default:
+            // 上边的路径都不满足的情况下 我们反给前端404错误
+            res.statusCode = 404;
+            res.end()
             break;
     }
     // res.end('hello')

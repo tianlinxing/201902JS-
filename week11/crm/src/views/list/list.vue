@@ -81,6 +81,10 @@ export default {
     handleClick(row) {
         // row是点击的那一行的数据；
         console.log(row);
+        // 1 只传递ID  把从后台获取到的列表数据 存储到 localStorage中
+        // 2 点击的时候 把整条数据都存储到localStorage中 
+        // 3 只传ID  然后根据ID去后台请求数据；
+        this.$router.push({path:'/info',query:row})
     },
     del(row){
         // 点击红色删除的时候 我们 把这一条数据赋给 data中的 row;
