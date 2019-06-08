@@ -85,10 +85,37 @@ http.createServer(function(req,res){
                 dataStr += str;
             })     
             req.on('end',function () {
+                //dataStr.toString() 获取到的是前端给的JSON字符串
+                let reqData = JSON.parse(dataStr.toString());
+                // reqData 就是前端给的对象；
+                // 根据 reqData 是否有ID 来判断 要干的事；
+                // 没ID 后端添加ID 然后把数据放到 data.json中
+                if(reqData.id === undefined){
+                    // 不存在ID就是添加
+                    reqData.id = Math.random();
+                    fs.readFile('./data.json','utf-8',(err,data)=>{
+                        if(err){
+                            obj.errorCode = 5;// 后端操作失败
+                            res.end(JSON.stringify(obj));
+                            return;
+                        }
+                        let tempAry = JSON.parse(data);
+                        tempAry.unshift(reqData);// 把前端给的数据 放到JSON文件中；
+                        // 把修改后的数组写入文件
+                        fs.writeFile('./data.json',JSON.stringify(tempAry),'utf-8',(err)=>{
+                            if(err){
+                                obj.errorCode = 5;// 后端操作失败
+                                res.end(JSON.stringify(obj));
+                                return;
+                            }
+                            res.end(JSON.stringify(obj));// 成功 直接返回一个 errorCode:0 即可
+                        })
+                    })
+                }
                 console.log(dataStr.toString());
-                res.end('666')
+                // res.end('666')
             })
-            
+            break;
         default:
             break;
     }
