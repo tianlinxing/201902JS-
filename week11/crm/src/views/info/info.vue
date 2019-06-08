@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import {add} from '@/api/getData.js'
 export default {
   data() {
     return {
@@ -48,6 +49,13 @@ export default {
                 message: '所有输入框不能为空',
                 type: 'warning'
             });
+        }else{
+            // 发送请求
+            let obj = {
+                date,name,province,city,zip,address
+            }
+            console.log(obj)
+            add(obj)
         }
         
     }

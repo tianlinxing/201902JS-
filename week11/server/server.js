@@ -9,6 +9,7 @@ let fs = require('fs');
 let http = require('http');
 let url = require('url');
 
+
 http.createServer(function(req,res){
     //req.url  可以知道请求的路径
     // console.log(req.url)
@@ -18,6 +19,10 @@ http.createServer(function(req,res){
     res.setHeader('content-type', 'text/html; charset=UTF-8');
     // res.statusCode = 500; // 设置http状态码 不设置的时候 若是成功请求，默认200 
     // res.statusMessage = 'hello';// 设置http状态码对应的信息
+    
+    // 前端请过来之后， 后端都会做一次判断， 判断这个人是否还在和登陆阶段，
+    // 一般是通过cookie中 后端种植的某个字段来判断的；若还是合法登陆的情况下
+    // 就接着向下请求数据； 若不合法 直接 返回失败态；
 
     let obj = {
         errorCode:0
@@ -34,7 +39,56 @@ http.createServer(function(req,res){
                 res.end('error')
             })
             break;
-    
+        case '/api/login':
+            if(query.psd == '666'){
+                // 我们自己规定的  密码是666的  就是成功
+                // 否则就是失败； 这些只是为了我们自己好调试做的判断， 实际工作不会有
+                res.setHeader('Set-Cookie','token='+Date.now()+';path=/');//给前端种植cookie
+                obj.success = 'success';
+                res.end(JSON.stringify(obj))
+            }else{
+                obj.errorCode = 1;
+                obj.errorMsg = 'noLogin';
+                res.end(JSON.stringify(obj))
+            }
+            break;  
+        case '/api/del':
+            // 执行删除的时候 前端传给了我们一个 id;通过query获取
+            // 先读取data.json  然后 删除； 删除之后再去写入
+            fs.readFile('./data.json','utf-8',(err,data)=>{
+                if(err){
+                    // 读取失败
+                    res.end('error');
+                    return
+                }
+                // data 是一个字符串
+                let ary = JSON.parse(data);
+                let tempAry = ary.filter(item=>item.id != query.id);
+                // tempAry 就是删除之后的数组
+                fs.writeFile('./data.json',JSON.stringify(tempAry),'utf-8',(err)=>{
+                    if(err){
+                        res.end('error')
+                        return
+                    }
+                    res.end(JSON.stringify(obj))// 后台删除成功，才能告诉前端 成功删除
+                })
+            })
+            break;  
+        case '/api/add':
+            // 执行 添加或者修改的动作  
+            // 添加 前端没有传递id 就是 添加
+            // 修改 前端传递带有id 就是 修改   
+            // 怎么获取传递传递的数据？ post
+            let dataStr = '';
+            req.on('data',function(str){
+                // post传递数据，是分成一段一段的数据传递，这时会触发该函数
+                dataStr += str;
+            })     
+            req.on('end',function () {
+                console.log(dataStr.toString());
+                res.end('666')
+            })
+            
         default:
             break;
     }

@@ -9,6 +9,8 @@
 </template>
 
 <script>
+// 导出 login 函数；
+import {login} from '@/api/getData.js'
 export default {
   data() {
     return {
@@ -19,7 +21,23 @@ export default {
   },
   methods: {
       fn() {
-          this.$router.push('/table')
+          // 点击登录按钮 把用户名和密码都发给后台
+          // 后台验证通过之后 会给前端一个对应的字段
+          login({name:this.name,psd:this.password}).then((data)=>{
+              console.log(data);
+              if(data.errorCode == 0){
+                  //成功 就跳转
+                  this.$router.push('/table')
+              }else{
+                  //失败 就弹出
+                  this.$message({
+                      type:'error',
+                      message:'用户名密码错误'
+                  })
+              }
+          })
+          // name 或者 psd 这两个属性名 是后台规定的
+        //   this.$router.push('/table')
       }
   },
 };

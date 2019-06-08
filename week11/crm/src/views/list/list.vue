@@ -58,36 +58,57 @@
         <span>是否确认删除？</span>
         <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            <el-button type="primary" @click="sureDel">确 定</el-button>
         </span>
     </el-dialog>
 </div>    
 </template>
 
 <script>
-import {getList} from '@/api/getData.js'
+import {getList,del} from '@/api/getData.js'
 export default {
   created() {
-    let p = getList();
-    p.then((data)=>{
-      console.log(data);
-      this.tableData = data.data.data
-    })
+    this.initList()
   },
   methods: {
+    initList(){
+        let p = getList();
+        p.then((data)=>{
+            console.log(data);
+            this.tableData = data.data
+        })
+    },
     handleClick(row) {
         // row是点击的那一行的数据；
         console.log(row);
     },
     del(row){
+        // 点击红色删除的时候 我们 把这一条数据赋给 data中的 row;
+        this.row = row;
         this.dialogVisible = true;
+    },
+    sureDel(){
+        this.dialogVisible = false;
+        // 删除 需要告诉后台删除数据的ID；
+        let p = del({id:this.row.id})// 这个del 是 axios的del  不是methods中的del
+        // 删除成功就提示用户删除成功； 失败 就提示用户删除失败
+        p.then(data=>{
+            if(data.errorCode == 0){
+                // 删除成功 ，重新请求列表数据
+                this.initList();
+                this.$message.success('删除成功')
+            }else{
+                this.$message.error('删除失败')
+            }
+        })
     }
   },
 
   data() {
     return {
       tableData: [],
-      dialogVisible:false
+      dialogVisible:false,
+      row:null
     };
   }
 };
