@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--  
+        npm i @vue/ci -g  全局安装vue脚手架  一个电脑之安装一次就够了
+        创建vue项目的过程：
+        vue  create  项目名
+
+        维护项目： git clone 远程仓库地址； 然后安装依赖  npm  i ;
+
+        打包项目  npm  run  build  打包项目；后开发完成之后
+
+        vue 指令：都属一个元素的行内属性
+            v-model 一般用在 表单元素
+            v-text  相当于  innerText  ；
+                    等价于小胡子 {{}}；小胡子中可以书写变量或者表达式
+            v-html  相当于  innerHTML 
+            v-once  只渲染一次
+            v-cloak 解决小胡子的显示问题  [v-cloak]{display:none}  
+            v-if  控制元素加不加载的一个指令  v-else-if  v-else     使用时所在元素必须是紧挨着的
+            v-show  控制元素显示不显示的一个指令 只是控制css的display属性； v-show='1'
+            v-for  v-for='(item,index) in ary'  :key='唯一的值'  等级高于 v-if
+            v-pre  有这个指令的元素及其所有子元素， 
+                    vue会把他们当作普通的DOM渲染，不再当作 vue的模板
+                    可以提高vue的渲染效率
+            v-bind 简写 : ==> 用来解决行内属性的绑定 :src='' 
+                    :class="{current:true}" 在原来的类名上增加
+                    :style="{color:col,background:'#ccc'}"
+            v-on   简写 @ ==> 绑定事件
+                    <div @click='fn'></div>   不写小括号 默认有一个事件对象     
+                    <div @click='fn()'></div>  没有任何实参
+                    <div @click='fn(1,2,3,$event)'></div>  有四个实参，最后一个是事件对象
+
+            vue传递的属性
+                el  $mount()
+                template  render:h=>h(APP)
+                data 在组件中是个函数
+                computed  不支持异步
+                methods
+                components
+                watch
+                filters
+            生命周期钩子函数
+                beforeCreate  created    
+                beforeMount   mounted
+                beforeUpdate  updated
+                beforeDestroy destroyed
+            
+            数据更新： 视图不更新   t； 大前提 是数据在结构上有用到
+
+            组件 ： Vue.component
+                vue 局部组件  声明 注册  使用
+
+                父传子   父组件通过自定义属性传递  子组件通过 props接收
+                子传父   父组件通过自定义事件传递  子组件通过 $emit 触发，数据通过参数传过去
+
+                不推荐的方式  $parent  $children   
+                获取 子组件   ref 写死在结构上的 只能获取一个； 通过v-for 循环出来的可以都获取到
+
+                兄弟  eventBus 创造一个空的 vue实例；某一个兄弟组件 
+                            通过 $on 在空实例绑定一个事件，另一个兄弟通过$emit触发空实例上的函数，并传递参数过去
+                vuex 
+                    state 存储公共数据的 this.$store.state.xxx
+                    mutations 存储的都是 能够修改 state中的数据 的方法 （state,options）;同步函数
+                    actions 可以放置一些异步函数，通过触发 mutations中的函数来修改state中的数据
+                    gettters  相当于vuex的计算属性
+                    modules   分模块  
+                vue-router
+                    路由映射表     
+                    mode 模式
+                    routes    路由映射表
+                    linkActiveClass  默认 router-link-active 
+
+                    重定向： redirect
+                    路由嵌套： children 
+                    path  component  name   components多视图 跟router-view的name属性配合使用
+
+                    to  = {path name query params}
+                    tag
+                    active-class
+
+                    this.$router  push replace  go  back 编程式导航
+                    this.$route
+
+                    router.beforeEach(to,from,next){
+                        next('/home')
+                        通过读取 路由元信息 来修改title
+                        路由元信息也可以用来存储当前路径的等级，
+                        if(to.meta.level <= user.level){
+                            next()
+                        }else{
+                            next('/404')
+                        }
+                    }
+
+    -->
+
+    <!-- 姓名<input type="text">
+    年龄<input type="text"> -->
+
+    <!-- 
+        let express = require('express')
+        let app = express();
+        app.get('/list',()=>{})
+        app.listen('9000')
+
+        git branch 查看本地分支
+        git checkout -b 新建分支名 ： 新建一个分支并且切换到该分支
+
+        git merge 别的分支名  若有冲突  conflict; 手动解决
+    -->
+</body>
+</html>

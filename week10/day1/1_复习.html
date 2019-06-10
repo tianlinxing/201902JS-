@@ -8,9 +8,17 @@
 </head>
 <body>
     <div id="app">
-        <h1>{{name}}</h1>
+        <h1 v-pre>{{name}}</h1>
         <my-name></my-name>
         <com1></com1>
+
+        <button @click='fn'>按钮</button>
+        <div v-pre v-if='flag' key='1'>
+            name：<input type="text" >
+        </div>
+        <div v-if='!flag' key='2'>
+            age:<input type="text" >
+        </div>
     </div>
 </body>
 </html>
@@ -76,7 +84,14 @@
     let vm = new Vue({
         el:'#app',
         data:{
-            name:"珠峰"
+            name:"珠峰",
+            age:0,
+            flag:true
+        },
+        methods: {
+            fn(){
+                console.log(arguments)
+            }
         },
         components:{
             com1

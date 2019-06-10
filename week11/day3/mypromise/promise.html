@@ -105,12 +105,34 @@
                     }
                 })
             }
-        })
+        });
         return p;
        
     }
 
-    MyPromise.all = function (ary){
+  
+    let p = new MyPromise(function (res,rej) {
+        res(123)
+        // rej(345)
+        // setTimeout(() => {
+        //     rej(111)
+        // }, 2000);
+    });
+    p.then((data)=>{
+        console.log(data)
+    },(err)=>{
+        console.log(err);
+        return 'hello'
+    }).then((data2)=>{
+        console.log(data2)
+    },(err2)=>{
+        console.log(err2)
+    })
+
+
+
+
+      MyPromise.all = function (ary){
         return new MyPromise(function(res,rej){
             let done = gen(ary.lengt,res);
             ary.forEach((item,index)=>{
@@ -131,21 +153,4 @@
         }
     }
 
-    let p = new MyPromise(function (res,rej) {
-        // res(123)
-        // rej(345)
-        setTimeout(() => {
-            rej(111)
-        }, 2000);
-    });
-    p.then((data)=>{
-        console.log(data)
-    },(err)=>{
-        console.log(err);
-        return 'hello'
-    }).then((data2)=>{
-        console.log(data2)
-    },(err2)=>{
-        console.log(err2)
-    })
 </script>

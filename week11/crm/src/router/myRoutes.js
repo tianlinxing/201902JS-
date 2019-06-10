@@ -8,6 +8,10 @@ export default [
     {
         path:'/info',
         name:'info',
+        meta:{
+            level:3,
+            til:'dfgd'
+        },
         component: ()=>import('@/views/info/info.vue')
     },
     {
