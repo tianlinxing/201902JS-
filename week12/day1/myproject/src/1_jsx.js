@@ -65,6 +65,7 @@ let ele = <div className='myjsx' className={1 > 2 ? 'myjsx qqq' : 'myjsx www'} s
 </div>
 
 
-console.log(ele)
+console.log(ele)// JSX元素就是一个对象
 // 热重载 热加载
+
 ReactDom.render(ele,document.querySelector('#root'))
