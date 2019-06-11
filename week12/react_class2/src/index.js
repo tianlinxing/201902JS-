@@ -16,4 +16,7 @@
 // import './day2/2_selfjsx.js'
 // import './day2/3_时钟案例'
 // import './day2/4_组件'
-import './day2/5_class'
+// import './day2/6_class'
+// import './day2/7_状态和属性'
+// import './day2/8_事件'
+import './day2/9_父子组件'
