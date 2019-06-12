@@ -8,6 +8,9 @@ class Button extends Component{
     // constructor(props){
     //     super(props)
     // }
+    componentDidMount(){
+        console.log(this)
+    }
     render(){
         let {text,onClick} = this.props;
         console.log(onClick)// 获取到的 函数体
@@ -35,7 +38,8 @@ class App extends Component{
             num: 0
         }
     }
-    add(){
+    add=(...ary)=>{
+        console.log(ary)
         this.setState({
             num:++this.state.num
         })
@@ -50,9 +54,10 @@ class App extends Component{
     render(){
         return <div>
             APP 组件 
-            <Button text="增加" onClick={(a,b,c)=>{this.add(a,b,c)}}></Button>
+            <Button text="增加" onClick={this.add}></Button>
             <Button text="减少" onClick={()=>{this.remove()}}></Button>
             <Count num={this.state.num}/>
+            <button onClick={this.add.bind(null,1,2,3)}>666</button>
         </div>
     }
 }
