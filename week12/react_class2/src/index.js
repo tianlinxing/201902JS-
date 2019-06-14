@@ -27,8 +27,15 @@ import ReactDOM from 'react-dom';// 专门处理react中的 DOmain元素
 // import App2 from './day3/3_子父组件'
 // import App2 from './day3/4_dialog'
 // import App2 from './day3/5_prop-types'
-import App2 from './day3/slider/index'
+// import App2 from './day3/slider/index'
 
+
+// import App2 from './day4/2_ref'
+// import App2 from './day4/3_表单'
+// import App2 from './day4/4_react的双向数据绑定'
+// import App2 from './day4/5_todoList'
+// import App2 from './day4/6_百度搜索'
+import App2 from './day4/7_生命周期钩子函数'
 
 
 ReactDOM.render(<App2/>,document.getElementById('root'))

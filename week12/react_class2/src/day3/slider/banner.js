@@ -23,7 +23,7 @@ class App extends React.Component {
         }
 
         //  进行边界判断
-        if(index >= 4){
+        if(index >= len){
             // 到达有边界 若不做任何处理 将要显示出一个空白
             // 所以我们 要在这把他的left制成0；
             // 还需要把 父组件的index重置成 1
@@ -53,11 +53,13 @@ class App extends React.Component {
                 transition:"all 0.5s"
             })
         }
-        console.log(index)
+        // console.log(index)
         return <ul className='banner_box' style={sty}>
            {
                data.map((item,index)=>{
-                   return <li key={index}>{item}</li>
+                   return <li key={index}>
+                        <img src={item.img} alt=""/>
+                   </li>
                })
            }
         </ul>;
