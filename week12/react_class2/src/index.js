@@ -1,5 +1,5 @@
-import React from 'react'; // react 核心库
-import ReactDOM from 'react-dom';// 专门处理react中的 DOmain元素
+// import React from 'react'; // react 核心库
+// import ReactDOM from 'react-dom';// 专门处理react中的 DOmain元素
 
 // import './index.css'; //导入样式
 // import './1.less'
@@ -35,7 +35,18 @@ import ReactDOM from 'react-dom';// 专门处理react中的 DOmain元素
 // import App2 from './day4/4_react的双向数据绑定'
 // import App2 from './day4/5_todoList'
 // import App2 from './day4/6_百度搜索'
-import App2 from './day4/7_生命周期钩子函数'
+// import App2 from './day4/7_生命周期钩子函数'
 
 
-ReactDOM.render(<App2/>,document.getElementById('root'))
+
+// import App2 from './day5/1_复习'
+// import App2 from './day5/comment/index'
+// import App2 from './day5/3_高阶组件'
+// import './day5/redux/1_公共状态'
+// import './day5/redux/2_添加dispatch'
+// import './day5/redux/3_创建createStore函数'
+// import './day5/redux/4_处理render'
+import './day5/redux/5_处理statechanger'
+
+
+// ReactDOM.render(<App2/>,document.getElementById('root'))
