@@ -1,5 +1,11 @@
 import React from 'react';
+
+import PropTypes from 'prop-types'
+
 class Input extends React.Component {
+    static contextTypes = {
+        color:PropTypes.string
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -35,7 +41,9 @@ class Input extends React.Component {
     }
     render() {
         let {name,comment} = this.state;
-        return <div className='inp_box'>
+        let { color } = this.context;
+        console.log(color)
+        return <div className='inp_box' >
             <input 
                 type="text" 
                 placeholder='姓名' 

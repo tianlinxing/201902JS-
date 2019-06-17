@@ -1,5 +1,5 @@
-// import React from 'react'; // react 核心库
-// import ReactDOM from 'react-dom';// 专门处理react中的 DOmain元素
+import React from 'react'; // react 核心库
+import ReactDOM from 'react-dom';// 专门处理react中的 DOmain元素
 
 // import './index.css'; //导入样式
 // import './1.less'
@@ -46,7 +46,11 @@
 // import './day5/redux/2_添加dispatch'
 // import './day5/redux/3_创建createStore函数'
 // import './day5/redux/4_处理render'
-import './day5/redux/5_处理statechanger'
+// import './day5/redux/5_处理statechanger'
 
 
-// ReactDOM.render(<App2/>,document.getElementById('root'))
+// import './day6/1_复习'
+// import './day6/2_reducer'
+import App2 from './day6/4_使用redux'
+
+ReactDOM.render(<App2/>,document.getElementById('root'))

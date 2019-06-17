@@ -3,12 +3,23 @@ import List from './list'
 import Input from './input'
 import './index.less'
 
+import PropTypes from 'prop-types'
+
 window.myComment = {};//自己造的事件池
 class App extends React.Component {
+    static childContextTypes = {
+        color:PropTypes.string
+    }
     constructor() {
         super();
         this.state = {
+            color:'red',
             ary:[] // 放置 input组件传进来的数据，最终传给list组件
+        }
+    }
+    getChildContext(){
+        return {
+            color:this.state.color
         }
     }
     submit(obj){
@@ -27,6 +38,7 @@ class App extends React.Component {
     }
     render() {
         return <div className=''>
+            <button onClick={()=>{this.setState({color:'blue'})}}>换肤</button>
             <List data={this.state.ary}/>
             <Input  submit={(obj)=>{this.submit(obj)}}/>
         </div>;
