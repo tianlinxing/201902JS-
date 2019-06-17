@@ -3,7 +3,8 @@ import React from 'react';
 import createStore from './3_myredux'
 
 function reducer(state={
-    count:0
+    count:0,
+    color:'red'
 },action) {
     // 函数体
     switch (action.type) {
@@ -17,6 +18,11 @@ function reducer(state={
                 ...state,
                 count:state.count - action.val
             }
+        case "UPDATE_COLOR":
+            return {
+                ...state,
+                color: action.col
+            }    
         default:
             return {
                 ...state
@@ -31,7 +37,8 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            count: store.getState().count
+            count: store.getState().count,
+            color:store.getState().color
         }
     }
     change(n){
@@ -58,15 +65,27 @@ class App extends React.Component {
         store.subscribe(()=>{
             this.setState({
                 // 重新把store中新的state中的count 赋给本组件自己的 state中的count
-                count:store.getState().count
+                count:store.getState().count,
+                color:store.getState().color
             })
         })
     }
+    changeColor(){
+        // 实现字体颜色的修改；当前是红色 就换成蓝色； 是蓝色就换成红色；
+        if(this.state.color === 'red'){
+            store.dispatch({type:"UPDATE_COLOR",col:'blue'})
+            //dispatch执行 最终是让 reducer函数执行了
+        }else{
+            store.dispatch({type:"UPDATE_COLOR",col:'red'})
+        }
+    }
     render() {
         return <div className=''>
-            <h2>当前数字是{this.state.count}</h2>
+            <h2 style={{color:this.state.color}}>当前数字是{this.state.count}</h2>
             <button onClick={()=>{this.change(1)}}>增加</button>
             <button onClick={()=>{this.change(-1)}}>减少</button>
+
+            <button onClick={()=>{this.changeColor()}}>换肤</button>
         </div>;
     }
 }
