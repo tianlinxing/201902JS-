@@ -54,6 +54,10 @@ import ReactDOM from 'react-dom';// 专门处理react中的 DOmain元素
 // import App2 from './day6/4_使用redux'
 // import App2 from './day6/react_redux/1_初始化项目'
 // import App2 from './day6/react_redux/2_结合store'
-import App2 from './day6/react_redux/3_connect'
+// import App2 from './day6/react_redux/3_connect'
+
+
+// import App2 from './day7/react_redux/1_connect'
+import App2 from './day7/react1/index'
 
 ReactDOM.render(<App2/>,document.getElementById('root'))
