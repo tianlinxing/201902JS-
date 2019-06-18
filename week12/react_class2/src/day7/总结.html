@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        我们需要掌握的redux源码; 也就是 我们的 复习.js;
+        里边只有两个函数 createStore、combineReducers
+
+        createStore 是为了产生一个 store 对象；产生的这个
+        store对象 最终是被挂载到了 Provider 这个组件身上；
+        createStore接收一个reducer作为参数；这个reducer在
+        createStore内部的 dispatch函数内部执行的；
+        reducer 是一个纯函数，三大原则的第三条，reducer是
+        使用redux的用户自己编写的函数，规则基本是redux定死的，
+        参数 一个是 state  一个是 action;
+
+        combineReducers 是为了把多个reducer 合并成一个总的reducer
+        使用时 接受一个对象，对象里边是一个个的 reducer,属性名自己定义
+        属性值是 各个reducer;
+
+
+        我们需要掌握react-redux源码 有两个 connect  Provider;
+        connect 是个 高阶函数；
+        接收两层参数第一层的参数 是两个函数
+        第一函数是 mapStateToProps 让使用者自己定义 自己的组件要使用公共数据中的哪些属性
+        第二函数是 mapDispatchToProps  可以让使用者 在自己的组件中调用 dispatch
+                //可以直接是个对象
+
+        第二层参数 就是一个 组件
+
+        connect的最终返回值是一个新组件， 新组件 是在老组件身上 添加了一些属性；通过父传子的
+        方式 传给 那个传进来组件 一些数据
+
+        Provider 组件 就是把 设置 context 的动作放到了 自己身上
+
+        源码级别的 
+            redux: createStore  combineReducers
+            react-redux: connect  Provider
+        其他的 全是规定的用法    
+
+
+    -->
+</body>
+</html>

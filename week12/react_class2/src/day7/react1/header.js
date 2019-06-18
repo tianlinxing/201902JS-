@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 
-import {connect} from '../react_redux/react_redux2'
+// import {connect} from '../react_redux/react_redux2'
+import {connect} from 'react-redux'
 class Header extends Component{
     componentDidMount(){
         console.log(this.context)
@@ -17,6 +18,10 @@ Header = connect((state)=>{
         color123:state.color
     }
     // 我们就可以在Header组件中使用this.props.color
-},()=>{})(Header)
+},()=>{
+    return {
+        
+    }
+})(Header)
 
 export default Header
