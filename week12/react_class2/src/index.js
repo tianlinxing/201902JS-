@@ -61,6 +61,7 @@ import ReactDOM from 'react-dom';// 专门处理react中的 DOmain元素
 // import App2 from './day7/react1/index'
 
 // import App2 from './day8/todo/index'
-import App2 from './day8/router/index'
+// import App2 from './day8/router/index'
+import App2 from './day8/router2/index'
 
 ReactDOM.render(<App2/>,document.getElementById('root'))
