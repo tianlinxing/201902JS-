@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Route,Switch} from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Nav from './components/nav'
+import Login from './components/login/index'
+
+class App extends React.Component{
+    //在该组件中  我们把 nav 和 login做成兄弟关系
+    render(){
+      return <div className='app_box'>
+        <Switch>
+          <Route path='/login' component={Login}></Route>
+          {/* <Route path='/app' component={Nav}></Route> */}
+          <Route path='/' component={Nav}></Route>
+        </Switch>
+      </div>
+    }
 }
 
 export default App;
