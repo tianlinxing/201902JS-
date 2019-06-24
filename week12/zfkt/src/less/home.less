@@ -80,6 +80,10 @@
         -ms-flex-align: center;
         -webkit-align-items: center;
         align-items: center;
+        img{
+            width: 100%;
+            height: 100%;
+        }
     }
 
     .swiper-pagination-bullet {
@@ -96,6 +100,34 @@
     .swiper-pagination-bullet-active {
         color: #fff;
         background: #007aff;
+    }
+
+    .content_box{
+        .title{
+            padding: 0.1rem;
+        }
+        .item_box{
+            border: 0.01rem solid #ccc;
+            width: 90%;
+            margin: 0.1rem auto;
+            border-radius: 0.1rem;
+            text-align: center;
+            img{
+                margin-top: 0.1rem;
+                width: 90%;
+                height: 3rem;
+            }
+            .desc_box{
+                text-align: center;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
+            .money_box{
+                color:red;
+                text-align: center;
+            }
+        }
     }
 }
 

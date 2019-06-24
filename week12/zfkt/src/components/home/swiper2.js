@@ -1,12 +1,20 @@
 import React from 'react';
 import Swiper2 from 'swiper'
+import {initSlider} from '../../store/actions/actions.js'
+import {connect} from 'react-redux'
 class App extends React.Component {
     constructor() {
         super();
         
     }
     componentDidMount(){
-        this.initSwiper()
+        // this.initSwiper();
+        // 使用 redux 的方式请求数据；
+        // 可以这么写的前提是 本组件使用了 connet高阶组件处理
+        this.props.dispatch(initSlider())
+    }
+    componentDidUpdate(){
+        this.initSwiper();
     }
     initSwiper(){
         new Swiper2('.swiper-container', {
@@ -26,18 +34,35 @@ class App extends React.Component {
         });
     }
     render() {
+        console.log(this.props.ary)
+        let { ary } = this.props; // 解构出  ary
         return <div className=''>
             <div className="swiper-container">
                 <div className="swiper-wrapper">
-                    <div className="swiper-slide">Slide 1</div>
-                    <div className="swiper-slide">Slide 2</div>
-                    <div className="swiper-slide">Slide 3</div>
-                    <div className="swiper-slide">Slide 4</div>
+                    {
+                        ary.map((item,index)=>{
+                            return <div className="swiper-slide" key={index}>
+                                <img src={item} alt=""/>
+                            </div>
+                        })
+                    }
                 </div>
                 <div className="swiper-pagination"></div>
             </div>
         </div>;
     }
 }
+
+// connect 两层参数
+App = connect((state)=>{
+    return{
+        // state
+        ary:state.sliderAry.ary
+    }
+},(dispatch)=>{
+    return {
+        dispatch
+    }
+})(App)
 
 export default App

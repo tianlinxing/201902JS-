@@ -1,4 +1,4 @@
-import *as Types from './action-types'
+import *as Types from '../action-types'
 
 export const  countRducer = (state={
     count:0

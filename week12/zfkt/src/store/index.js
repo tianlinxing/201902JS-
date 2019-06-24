@@ -1,10 +1,14 @@
 import {createStore,combineReducers,applyMiddleware} from 'redux'
 
 import reduxThunk from 'redux-thunk'
-import { countRducer } from './reducers';
+import { countRducer } from './reducers/reducers.js';
+import { sliderReducer } from './reducers/sliderReducer';
+import { listReducer } from './reducers/listReducer';
 
 let rootRecuder = combineReducers({
-    count:countRducer
+    count:countRducer,
+    sliderAry:sliderReducer,
+    listAry:listReducer
 }) 
 
 
